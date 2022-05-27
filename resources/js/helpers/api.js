@@ -1,5 +1,7 @@
-import {axios} from 'axios';
+import axios from 'axios';
 
-// api.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+const api = axios.create();
 
-export default axios;
+api.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+export default api;

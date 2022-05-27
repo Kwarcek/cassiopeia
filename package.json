@@ -11,23 +11,20 @@
     },
     "devDependencies": {
         "axios": "^0.21",
-        "babel-eslint": "^10.1.0",
-        "eslint": "^8.15.0",
-        "eslint-config-airbnb-base": "^15.0.0",
-        "eslint-plugin-import": "^2.26.0",
-        "eslint-plugin-vue": "^8.7.1",
         "laravel-mix": "^6.0.43",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
-        "vue-axios": "^3.4.1",
+        "postcss": "^8.4.14",
+        "sass": "^1.52.1",
+        "sass-loader": "^13.0.0",
         "vue-loader": "^17.0.0",
-        "vue-router": "^4.0.14",
+        "vue-router": "^4.0.15",
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
+        "@mdi/font": "^6.7.96",
         "moment": "^2.29.3",
-        "pinia": "^2.0.13",
-        "vue": "^3.2.33",
-        "vue-moment": "^4.1.0"
+        "pinia": "^2.0.14",
+        "vue": "^3.2.36",
+        "vuetify": "^2.6.6"
     }
 }
