@@ -8,10 +8,10 @@
 
     <title>Laravel</title>
 
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
+    @vite('resources/css/app.css')
 </head>
 <body class="antialiased">
     <div id="app"></div>
-    <script src="{{ mix('js/app.js') }}"></script>
+    @vite('resources/js/app.js')
 </body>
 </html>
