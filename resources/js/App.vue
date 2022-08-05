@@ -1,6 +1,5 @@
 <template>
         <router-view></router-view>
-    Kurwa moje pole
 </template>
 
 <script>
