@@ -33,7 +33,9 @@ export default {
     setup() {
         const todos = useTodo();
 
-        return {todos}
+        return {
+            todos
+        }
     },
     data() {
         return {

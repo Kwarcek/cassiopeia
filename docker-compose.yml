@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+    php:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        working_dir: /app
+        volumes:
+            - ./:/app
+            - ./docker/supervisor.conf:/etc/supervisor/conf.d/server.conf
+        ports:
+            - 8092:8092
+        restart: on-failure
+        depends_on:
+            -   mariadb
+    mariadb:
+        image: mariadb:10.6.8
+        volumes:
+            - app-database-volume:/var/lib/mysql
+            - ./docker/database:/docker-entrypoint-initdb.d
+            - ./docker/database/conf:/etc/mysql/conf.d
+        environment:
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${DB_DATABASE}
+        ports:
+            - 3397:3308
+        restart: always
+
+volumes:
+    app-database-volume:
+        driver: local

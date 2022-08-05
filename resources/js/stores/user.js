@@ -1,5 +1,4 @@
 import {defineStore} from 'pinia'
-import {toRaw} from "vue";
 
 export const useLoggedInUser = defineStore('loggedInUser', {
             state: () => ({

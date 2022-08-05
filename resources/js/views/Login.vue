@@ -1,61 +1,47 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <form @submit.prevent="submit">
-                <input
-                    v-model="todo"
-                    type="text"
-                    name="todo"
-                />
-                <input
-                    @click="submit"
-                    type="submit"
-                    name="submit"
-                    value="Add todo"
-                />
-            </form>
-            <div style="max-height: 200px; overflow-y: auto">
-                <ul>
-                    <li v-for="todo in todos.getTodos">
-                        {{ todo }}
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <v-content>
+        <v-container class="fluid fill-height">
+            <v-layout class="align-center justify-center">
+                <v-flex class="xs12 sm8 md4">
+                    <v-card class="elevation-12">
+                        <v-toolbar dark color="primary">
+                            <v-toolbar-title>Login form</v-toolbar-title>
+                        </v-toolbar>
+                        <v-card-text>
+                            <v-form>
+                                <v-text-field
+                                    prepend-icon="person"
+                                    name="login"
+                                    label="Login"
+                                    type="text"
+                                ></v-text-field>
+                                <v-text-field
+                                    id="password"
+                                    prepend-icon="lock"
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                ></v-text-field>
+                            </v-form>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="primary" to="/">Login</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
+    </v-content>
 </template>
 
 <script>
-import {useTodo} from "@/stores/todo";
-import VSelect from 'vuetify';
-
 export default {
-    name: 'Index',
-    setup() {
-        const todos = useTodo();
-
-        return {todos}
+    name: 'Login',
+    props: {
+        source: String,
     },
-    data() {
-        return {
-            todo: '',
-        }
-    },
-    methods: {
-        submit() {
-            this.todos.addTodo(this.todo);
-            this.todo = '';
-        },
-    },
-}
+};
 </script>
 
-<style scoped>
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(to top right, #41b782, #86d169);
-    height: 100vh;
-}
-</style>
+<style></style>
