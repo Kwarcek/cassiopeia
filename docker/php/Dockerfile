@@ -14,8 +14,11 @@ RUN apt-get update && apt-get install vim -y && \
     apt-get install supervisor -y && \
     apt-get install htop -y
 
+RUN pecl install redis
 RUN docker-php-ext-install pcntl
+
 RUN docker-php-ext-enable pcntl
+RUN docker-php-ext-enable redis
 
 RUN curl https://www.npmjs.com/install.sh | bash -
 

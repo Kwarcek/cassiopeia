@@ -10,10 +10,16 @@ services:
             - ./:/app
             - ./docker/supervisor.conf:/etc/supervisor/conf.d/server.conf
         ports:
-            - 8092:8092
+            - "8092:8092"
+            - "8000:8000"
         restart: on-failure
+        links:
+            - redis
+            - mariadb
         depends_on:
-            -   mariadb
+            - redis
+            - mariadb
+
     mariadb:
         image: mariadb:10.6.8
         volumes:
@@ -26,7 +32,13 @@ services:
             - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
             - MYSQL_DATABASE=${DB_DATABASE}
         ports:
-            - 3397:3308
+            - "3397:3308"
+        restart: always
+
+    redis:
+        image: redis:7.0
+        ports:
+            - "6379:6379"
         restart: always
 
 volumes:
