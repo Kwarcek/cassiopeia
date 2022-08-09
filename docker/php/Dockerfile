@@ -1,7 +1,7 @@
 FROM php:8.1.0-cli
 WORKDIR "/app"
 
-RUN curl -sL https://raw.githubusercontent.com/nodesource/distributions/master/deb/setup_17.x | bash
+RUN curl -sL https://raw.githubusercontent.com/nodesource/distributions/master/deb/setup_18.x | bash
 
 RUN apt-get update && apt-get install vim -y && \
     apt-get install openssl -y && \
