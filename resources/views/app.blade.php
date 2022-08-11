@@ -6,10 +6,9 @@
 
     <title>Laravel</title>
 
-    @vite('resources/css/app.css')
+    @vite
 </head>
 <body class="antialiased">
     <div id="app"></div>
-    @vite('resources/js/app.js')
 </body>
 </html>

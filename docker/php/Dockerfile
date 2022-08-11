@@ -20,7 +20,8 @@ RUN docker-php-ext-install pcntl
 RUN docker-php-ext-enable pcntl
 RUN docker-php-ext-enable redis
 
-RUN curl https://www.npmjs.com/install.sh | bash -
+RUN curl -fsSL https://get.pnpm.io/install.sh | bash
+RUN npm install -g pnpm
 
 RUN cd /tmp && git clone https://github.com/openswoole/swoole-src.git && \
     cd swoole-src && \
@@ -39,6 +40,8 @@ COPY . .
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-#RUN npm install
+RUN composer install
+
+RUN pnpm install
 
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/supervisord.conf"]

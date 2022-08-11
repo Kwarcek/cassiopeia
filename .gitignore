@@ -14,3 +14,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/.pnpm-store/
+/pnpm-lock.yaml
+/composer.lock
+/.npmrc
