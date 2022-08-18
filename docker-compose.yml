@@ -12,7 +12,7 @@ services:
         ports:
             - "8092:8092"
             - "8000:8000"
-            - "5174:5174"
+            - "5173:5173"
         restart: on-failure
         links:
             - redis
@@ -33,7 +33,7 @@ services:
             - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
             - MYSQL_DATABASE=${DB_DATABASE}
         ports:
-            - "3397:3308"
+            - 3397:${DB_PORT}
         restart: always
 
     redis:
@@ -41,12 +41,13 @@ services:
         ports:
             - "6380:6379"
         restart: always
+
     node:
         image: node:17.9.0
         working_dir: /app
         volumes:
             - ./:/app
-        command: bash -c "npm install && npm run prod"
+        command: bash -c "pnpm install && pnpm run dev"
 
 volumes:
     app-database-volume:

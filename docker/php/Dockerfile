@@ -10,12 +10,13 @@ RUN apt-get update && apt-get install vim -y && \
     apt-get install wget -y && \
     apt-get install git -y && \
     apt-get install nodejs -y && \
+    apt-get install zip -y && \
     apt-get install procps -y && \
     apt-get install supervisor -y && \
     apt-get install htop -y
 
 RUN pecl install redis
-RUN docker-php-ext-install pcntl
+RUN docker-php-ext-install pcntl mysqli pdo pdo_mysql
 
 RUN docker-php-ext-enable pcntl
 RUN docker-php-ext-enable redis
@@ -36,12 +37,12 @@ RUN touch /usr/local/etc/php/conf.d/openswoole.ini && \
 RUN apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
 COPY ./docker/supervisor.conf /etc/supervisor/conf.d/server.conf
-COPY . .
-
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-
-RUN composer install
 
 RUN pnpm install
+
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+RUN composer install
+
+COPY . .
 
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/supervisord.conf"]
