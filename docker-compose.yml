@@ -20,6 +20,8 @@ services:
         depends_on:
             - redis
             - mariadb
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
 
     mariadb:
         image: mariadb:10.6.8

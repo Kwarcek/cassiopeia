@@ -6,9 +6,13 @@
 
     <title>Laravel</title>
 
-    @vite
 </head>
 <body class="antialiased">
     <div id="app"></div>
+    @if(App::environment('production'))
+        @vite
+    @else
+        <script type="module" src="http://localhost:5173/resources/js/app.js"></script>
+    @endif
 </body>
 </html>
