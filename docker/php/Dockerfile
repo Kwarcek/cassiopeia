@@ -38,11 +38,11 @@ RUN apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
 COPY ./docker/supervisor.conf /etc/supervisor/conf.d/server.conf
 
+COPY . .
+
 RUN pnpm install
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 RUN composer install
-
-COPY . .
 
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/supervisord.conf"]

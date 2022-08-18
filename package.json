@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "dev-debug": "vite -d",
+        "debug": "vite -d",
         "build": "vite build"
     },
     "devDependencies": {
