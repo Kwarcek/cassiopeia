@@ -9,12 +9,12 @@ const routes = [
     {
         name: 'auth',
         path: '/auth',
-        component: () => import('@/views/Login.vue'),
+        component: () => import('@/views/LoginView.vue'),
         children: [
             {
                 name: 'Login',
                 path: '/login',
-                component: () => import('@/views/Login.vue')
+                component: () => import('@/views/LoginView.vue')
             }
         ],
     },
