@@ -4,7 +4,6 @@ import {toRaw} from "vue";
 export const useTodo = defineStore('todos', {
             state: () => ({
                 todos: [],
-                chuj: '',
             }),
 
             getters: {
