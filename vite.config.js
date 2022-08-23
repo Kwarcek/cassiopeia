@@ -6,6 +6,7 @@ import eslintPlugin from 'vite-plugin-eslint';
 export default defineConfig({
     server: {
         host: '0.0.0.0',
+        strictPort: true,
         hmr: {
             host: 'localhost',
             overlay: false,
