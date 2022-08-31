@@ -22,7 +22,7 @@ RUN docker-php-ext-enable pcntl
 RUN docker-php-ext-enable redis
 
 RUN curl -fsSL https://get.pnpm.io/install.sh | bash
-RUN npm install -g pnpm
+RUN npm install -g pnpm@8.18.0
 
 RUN cd /tmp && git clone https://github.com/openswoole/swoole-src.git && \
     cd swoole-src && \
