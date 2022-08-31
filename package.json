@@ -24,10 +24,10 @@
         "vue-router": "^4.0.15"
     },
     "dependencies": {
-        "@heroicons/vue": "^1.0.6",
         "@vitejs/plugin-vue": "^3.0.3",
         "moment": "^2.29.3",
         "pinia": "^2.0.14",
+        "remixicon": "^2.5.0",
         "vue": "^3.2.37"
     }
 }
