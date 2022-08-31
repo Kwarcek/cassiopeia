@@ -24,7 +24,7 @@ services:
             - "host.docker.internal:host-gateway"
 
     mariadb:
-        image: mariadb:10.6
+        image: mariadb:10.6.8
         volumes:
             - app-database-volume:/var/lib/mysql
             - ./docker/database:/docker-entrypoint-initdb.d
@@ -35,7 +35,7 @@ services:
             - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
             - MYSQL_DATABASE=${DB_DATABASE}
         ports:
-            - 3397:${DB_PORT}
+            - 3399:${DB_PORT}
         restart: always
 
     redis:
@@ -45,7 +45,7 @@ services:
         restart: always
 
     node:
-        image: node:17.9.0
+        image: node:18
         working_dir: /app
         volumes:
             - ./:/app
