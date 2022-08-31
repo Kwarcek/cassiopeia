@@ -2,7 +2,7 @@ export default [
     {
         name: 'auth',
         path: '/auth',
-        // component: () => import('@/views/auth/LoginView.vue'),
+        component: () => import('@/views/auth/LoginView.vue'),
         children: [
             {
                 name: 'Login',

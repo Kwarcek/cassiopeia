@@ -62,7 +62,7 @@ export default {
     name: 'LoginView',
     methods: {
         login() {
-            return this.$router.push({name: 'dashboard'});
+            return this.$router.push({name: 'index'});
         }
     },
 };

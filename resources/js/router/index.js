@@ -1,17 +1,17 @@
 import {createRouter, createWebHistory} from "vue-router";
 // import {useLoggedInUser} from "@/stores/user";
-import auth from '@/router/auth.js';
+import auth from '@/router/auth/index.js';
 
 const routes = [
     {
         path: '/',
         name: 'index',
-        component: () => import('@/views/Index.vue')
+        component: () => import('@/views/DashboardView.vue')
     },
     {
-        path: '/dashboard',
-        name: 'dashboard',
-        component: () => import('@/views/DashboardView.vue')
+        path: '/users',
+        name: 'users',
+        component: () => import('@/views/UsersList.vue')
     },
     ...auth
 ];
