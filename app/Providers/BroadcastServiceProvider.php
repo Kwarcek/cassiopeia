@@ -9,12 +9,12 @@ class BroadcastServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        Broadcast::routes();
+        Broadcast::routes([
+            'middleware' => ['api', 'auth:api'],
+        ]);
 
         require base_path('routes/channels.php');
     }
