@@ -174,7 +174,7 @@
                     </div>
                 </div>
             </main>
-            <FooterC />
+            <FooterComponent />
             <p class="text-center text-sm text-gray-500 my-10">
                 &copy; 2022 <a href="#" class="hover:underline" target="_blank">Flowbite</a>.
                 All rights reserved.
@@ -186,12 +186,12 @@
 <script>
 import TopBar from "@/components/TopBar.vue";
 import SideBar from "@/components/SideBar.vue";
-import FooterC from "@/components/FooterC.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
 import BreadCrumbs from "@/components/BreadCrumbs.vue";
 
 export default {
     name: 'UsersList',
-    components: {BreadCrumbs, FooterC, SideBar, TopBar},
+    components: {BreadCrumbs, FooterComponent, SideBar, TopBar},
     setup() {
 
         return {

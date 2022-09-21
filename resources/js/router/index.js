@@ -1,19 +1,24 @@
 import {createRouter, createWebHistory} from "vue-router";
-// import {useLoggedInUser} from "@/stores/user";
-import auth from '@/router/auth/index.js';
+import { useAuth } from "@/stores/auth";
+import authRoutes from '@/router/auth/index.js';
 
 const routes = [
     {
         path: '/',
         name: 'index',
-        component: () => import('@/views/DashboardView.vue')
+        component: () => import('@/views/DashboardView.vue'),
+        children: [
+            {
+                path: '/users',
+                name: 'users',
+                component: () => import('@/views/users/UsersList.vue')
+            }
+        ],
+        meta: {
+            auth: true,
+        },
     },
-    {
-        path: '/users',
-        name: 'users',
-        component: () => import('@/views/UsersList.vue')
-    },
-    ...auth
+    ...authRoutes
 ];
 
 const router = createRouter({
@@ -22,13 +27,30 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    // const store = useLoggedInUser();
+    const auth = useAuth();
+    auth.loadAuthFromLocalStorage();
+    const isRequiredAuth = to.matched.some(record => record.meta.auth);
+    const { token, user, isTokenExpired, isAuth } = auth;
 
-    // if (!store.isAuth && to.name !== 'Login') {
-    //     next({name: 'Login'})
-    // }
+    if (isRequiredAuth && (!isTokenExpired || !isAuth)) {
+        return next('/auth/login');
+    }
 
-    next();
+    if (to.path === '/auth/login' && (isAuth || !isTokenExpired)) {
+        return next('/');
+    }
+
+    const record = to.matched[to.matched.length - 1];
+
+    const hasPermission = record?.meta?.permission
+        ? permission.can(record.meta.permission)
+        : true;
+
+    if (hasPermission === true) {
+        return next();
+    }
+
+    return next('/404');
 });
 
 export default router;
