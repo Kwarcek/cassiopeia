@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useAuth} from "@/stores/auth";
+import { useAuth } from "@/stores/auth";
 import { getBearerToken } from "@/helpers/auth";
 
 const api = axios.create();
@@ -10,7 +10,7 @@ api.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 api.defaults.headers.common.Authorization = `Bearer ${getBearerToken()}`;
 
 api.interceptors.request.use((request) => {
-   //
+    return request;
 });
 
 

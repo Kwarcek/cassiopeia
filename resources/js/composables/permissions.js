@@ -2,7 +2,7 @@ import { useAuth } from "@/stores/auth";
 
 export function usePermission() {
     const auth = useAuth();
-    const abilities = auth.getAbilities;
+    const abilities = auth.abilities;
 
     /**
      * @param {string} ability

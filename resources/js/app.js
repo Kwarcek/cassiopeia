@@ -13,7 +13,7 @@ window.Pusher = Pusher;
 window.Echo = new Echo({
     broadcaster: 'pusher',
     authEndpoint: `//${window.location.hostname}/broadcasting/auth`,
-    host: import.meta.env.API_URL,
+    host: import.meta.env.APP_URL+'/api',
     key: import.meta.env.VITE_PUSHER_APP_KEY,
     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
     auth: {
