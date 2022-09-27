@@ -25,7 +25,7 @@ class PermissionCallbacksContainer
         return $this->container;
     }
 
-    public function fetch($className)
+    public function fetch($className): ?string
     {
         if (false !== ($key = $this->container->search($className))) {
             return $this->container[$key];

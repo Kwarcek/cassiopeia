@@ -9,9 +9,10 @@ services:
         volumes:
             - ./:/app
             - ./docker/supervisor.conf:/etc/supervisor/conf.d/server.conf
+        networks:
+            - app-network
         ports:
-            - "8092:8092"
-            - "8000:8000"
+            - 8092:${APP_PORT}
             - "5173:5173"
         restart: on-failure
         links:
@@ -24,25 +25,36 @@ services:
             - "host.docker.internal:host-gateway"
 
     mariadb:
-        image: mariadb:10.6.8
+        image: mariadb:10.9.3
         volumes:
             - app-database-volume:/var/lib/mysql
             - ./docker/database:/docker-entrypoint-initdb.d
             - ./docker/database/conf:/etc/mysql/conf.d
+        networks:
+            - app-network
         environment:
-            - MYSQL_USER=${DB_USERNAME}
-            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MARIADB_USER=${DB_USERNAME}
+            - MARIADB_PASSWORD=${DB_PASSWORD}
+            - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
             - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_PWD=${DB_ROOT_PASSWORD}
+            - MARIADB_DATABASE=${DB_DATABASE}
         ports:
-            - 3399:${DB_PORT}
+            - "3307:${DB_PORT}"
         restart: always
+        healthcheck:
+            test: [ "CMD", "mariadb-admin", "--protocol", "tcp" ,"ping" ]
+            timeout: 3m
+            interval: 10s
+            retries: 10
 
     redis:
         image: redis:7.0
         ports:
-            - "6380:6379"
+            - 16381:${REDIS_PORT}
         restart: always
+        networks:
+            - app-network
 
     node:
         image: node:18
@@ -51,6 +63,9 @@ services:
             - ./:/app
         command: bash -c "npm install && npm run dev"
 
+networks:
+    app-network:
+        driver: bridge
 volumes:
     app-database-volume:
         driver: local

@@ -5,7 +5,7 @@ namespace App\Services\Permissions\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class PermissionMiddleware
+class PermissionMiddleware // todo remove
 {
     public function handle(Request $request, Closure $next, ?string $ability = null): mixed
     {

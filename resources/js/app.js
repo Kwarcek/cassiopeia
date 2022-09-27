@@ -7,6 +7,11 @@ import {createApp} from 'vue'
 import router from "@/router/index.js";
 import pinia from "@/stores/index.js";
 import Pusher from 'pusher-js';
+import moment from 'moment';
+import { getBearerToken } from "@/helpers/auth";
+
+moment.locale=import.meta.env.APP_LOCALE;
+moment.defaultFormat='YYYY-MM-DD HH:mm:ss'
 
 window.Pusher = Pusher;
 
@@ -18,7 +23,7 @@ window.Echo = new Echo({
     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
     auth: {
         headers: {
-            Authorization: `Bearer null`,
+            Authorization: `Bearer ${getBearerToken()}`,
         },
     }
 });

@@ -30,7 +30,7 @@
                             </form>
                         </li>
                         <li>
-                            <a @click="$router.push({ name: 'index'})"
+                            <a @click="$router.push({ name: 'dashboard'})"
                                class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group cursor-pointer"
                             >
                                 <RemixIcon
@@ -51,6 +51,17 @@
                                 <span class="ml-3 flex-1 whitespace-nowrap">Users</span>
                             </a>
                         </li>
+                        <li>
+                            <a @click="router.push({name: 'auth-logout'})"
+                               class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group cursor-pointer"
+                            >
+                                <RemixIcon
+                                    icon="ri-logout-box-line"
+                                    classes="text-2xl w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
+                                />
+                                <span class="ml-3 flex-1 whitespace-nowrap">Logout</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -58,13 +69,12 @@
     </aside>
 </template>
 
-<script>
-
+<script setup>
 import RemixIcon from "@/components/RemixIcon.vue";
-export default {
-    name: "SideBar",
-    components: {RemixIcon},
-}
+import {useRouter} from "vue-router";
+
+const router = useRouter();
+
 </script>
 
 <style scoped>

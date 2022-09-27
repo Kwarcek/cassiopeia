@@ -4,7 +4,7 @@ import { getBearerToken } from "@/helpers/auth";
 
 const api = axios.create();
 
-api.defaults.baseURL = `https://${window.location.hostname}/api`;
+api.defaults.baseURL = `//${window.location.host}/api`;
 
 api.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 api.defaults.headers.common.Authorization = `Bearer ${getBearerToken()}`;

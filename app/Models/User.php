@@ -7,8 +7,9 @@ use App\Services\Permissions\Interface\AuthorityInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements AuthorityInterface
+class User extends Authenticatable implements AuthorityInterface, JWTSubject
 {
     use HasFactory;
     use Notifiable;
@@ -28,4 +29,14 @@ class User extends Authenticatable implements AuthorityInterface
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getJWTIdentifier(): mixed
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims(): array
+    {
+        return [];
+    }
 }

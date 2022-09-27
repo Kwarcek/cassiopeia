@@ -102,7 +102,7 @@ return [
 
         OperationTerminated::class => [
             FlushTemporaryContainerInstances::class,
-            // DisconnectFromDatabases::class,
+             DisconnectFromDatabases::class,
             // CollectGarbage::class,
         ],
 
@@ -190,6 +190,7 @@ return [
         'routes',
         'composer.lock',
         '.env',
+        'vendor/**/*.php'
     ],
 
     /*

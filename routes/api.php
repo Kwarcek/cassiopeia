@@ -13,9 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(\App\Http\Api\Auth\AuthApiController::class)->group(function () {
+Route::group([
+    'prefix' => 'auth'
+], function () {
+
+    Route::post('login', [\App\Http\Api\Auth\AuthApiController::class, 'login']);
+    Route::post('password/reset', [\App\Http\Api\Auth\AuthApiController::class, 'passwordReset']);
+
+    Route::group([
+        'middleware' => 'api',
+    ], function () {
+        Route::post('logout', [\App\Http\Api\Auth\AuthApiController::class, 'logout']);
+        Route::post('refresh', [\App\Http\Api\Auth\AuthApiController::class, 'refresh']);
+    });
 });
-
-Route::middleware('auth')->group([
-
-]);

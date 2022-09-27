@@ -167,6 +167,7 @@ return [
          */
 
         \App\Services\Permissions\Providers\PermissionServiceProvider::class,
+        \Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         /*
          * Application Service Providers...
