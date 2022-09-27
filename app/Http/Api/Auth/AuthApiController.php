@@ -17,8 +17,8 @@ class AuthApiController extends ApiController
 
         if (!$token) {
             throw ValidationException::withMessages([
-                'email' => 'Kurwa',
-                'password' => 'kurwa'
+                'email' => 'Invalid email',
+                'password' => 'Invalid password'
             ]);
         }
 
