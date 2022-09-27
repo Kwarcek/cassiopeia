@@ -21,8 +21,6 @@ RUN docker-php-ext-install pcntl mysqli pdo pdo_mysql
 RUN docker-php-ext-enable pcntl
 RUN docker-php-ext-enable redis
 
-RUN curl -fsSL https://get.pnpm.io/install.sh | bash
-
 RUN cd /tmp && git clone https://github.com/openswoole/swoole-src.git && \
     cd swoole-src && \
     git checkout v4.11.0 && \

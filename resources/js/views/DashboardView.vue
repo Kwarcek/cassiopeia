@@ -1,38 +1,21 @@
 <template>
-        <TopBar />
-    <div class="flex overflow-hidden bg-white pt-16">
-        <SideBar />
-        <div
-            class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10"
-            id="sidebarBackdrop"
-        >
-        </div>
-        <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
-            <main>
-                <BreadCrumbs />
-                <div class="pt-6 px-4">
-                </div>
-            </main>
-            <FooterC />
-            <p class="text-center text-sm text-gray-500 my-10">
-                &copy; 2022 <a href="#" class="hover:underline" target="_blank">Flowbite</a>.
-                All rights reserved.
-            </p>
-        </div>
+    <div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
+        </a>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+        <a href="#" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Read more
+            <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </a>
     </div>
 </template>
 
 <script>
-import TopBar from "@/components/TopBar.vue";
-import SideBar from "@/components/SideBar.vue";
-import FooterC from "@/components/FooterC.vue";
-import BreadCrumbs from "@/components/BreadCrumbs.vue";
 
 export default {
     name: 'DashboardView',
-    components: {BreadCrumbs, FooterC, SideBar, TopBar},
     setup() {
-
         return {
             //
         }

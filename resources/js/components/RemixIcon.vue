@@ -10,6 +10,7 @@ export default {
         },
         classes: {
             type: String,
+            default: '',
         }
     },
     setup(props) {
