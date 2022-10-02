@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import eslintPlugin from 'vite-plugin-eslint';
+import path from 'path';
 
 export default defineConfig({
     server: {
@@ -15,7 +16,7 @@ export default defineConfig({
     plugins: [
         eslintPlugin(),
         laravel({
-            input: 'resources/js/app.js',
+            input: 'frontend/app.js',
             refresh: true,
         }),
         vue({
@@ -27,4 +28,9 @@ export default defineConfig({
             },
         }),
     ],
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './frontend'),
+        },
+    }
 });

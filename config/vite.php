@@ -13,10 +13,8 @@ return [
     'configs' => [
         'default' => [
             'entrypoints' => [
-//                'ssr' => 'resources/scripts/ssr.ts',
                 'paths' => [
-                    'resources/css/app.css',
-                    'resources/js/app.js',
+                    'frontend/app.js',
                 ],
                 'ignore' => '/\\.(d\\.ts|json)$/',
             ],
@@ -43,7 +41,7 @@ return [
     | https://laravel-vite.dev/configuration/laravel-package.html#aliases
     */
     'aliases' => [
-        '@' => 'resources/js',
+        '@' => 'frontend',
     ],
 
     /*

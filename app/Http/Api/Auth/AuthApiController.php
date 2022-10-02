@@ -3,6 +3,8 @@
 namespace App\Http\Api\Auth;
 
 use App\Http\Api\ApiController;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\PasswordResetRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -11,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthApiController extends ApiController
 {
-    public function login(Request $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
         $token = auth('api')->attempt($request->only(['email','password']));
 
@@ -34,10 +36,8 @@ class AuthApiController extends ApiController
         return $this->respondWithToken(auth('api')->refresh());
     }
 
-    public function passwordReset(Request $request)
+    public function passwordReset(PasswordResetRequest $request)
     {
-        $request->validate(['email' => 'required|email']);
-
         $status = Password::sendResetLink(
             $request->only('email')
         );

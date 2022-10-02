@@ -20,3 +20,5 @@ yarn-error.log
 /.npmrc
 /_ide_helper.php
 /_ide_helper_models.php
+/package-lock.json
+/.phpstorm.meta.php
