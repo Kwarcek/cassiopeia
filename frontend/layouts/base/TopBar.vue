@@ -24,10 +24,15 @@
                         </svg>
                     </button>
                     <form @submit.prevent="search">
-                        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
+                        <label for="default-search"
+                               class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
                         <div class="relative">
                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
+                                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
                             </div>
                             <input
                                 type="search"
@@ -39,6 +44,11 @@
                     </form>
                 </div>
                 <div class="flex items-center">
+                        <span class="h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-6 h-6 rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                            </span>
+                    <i class="ri-notification-2-line text-2xl mr-6 cursor-pointer"></i>
                     <button id="toggleSidebarMobileSearch" type="button"
                             class="lg:hidden text-gray-500 hover:text-gray-900 hover:bg-gray-100 p-2 rounded-lg"
                     >
@@ -74,10 +84,12 @@
                         </div>
                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
                             <li>
-                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                <a href="#"
+                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                                <a href="#"
+                                   class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
                             </li>
                         </ul>
                         <div class="py-1">
@@ -97,8 +109,8 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { useAuth } from "@/stores/auth.js";
+import {ref} from 'vue'
+import {useAuth} from "@/stores/auth.js";
 
 export default {
     name: "TopBar",
@@ -117,9 +129,7 @@ export default {
             showUserDropdown,
         }
     },
-    methods: {
-
-    }
+    methods: {}
 }
 </script>
 

@@ -2,6 +2,7 @@ import {defineStore} from 'pinia'
 import { useRouter } from 'vue-router';
 import api from "@/plugins/axios/api.js";
 import moment from 'moment';
+import {toRaw} from "vue";
 
 export const useAuth = defineStore({
             id: 'Auth',
@@ -29,6 +30,11 @@ export const useAuth = defineStore({
                 },
                 async login(loginForm) {
                     return api.post('/auth/login', loginForm);
+                },
+                async fetchAbilities() {
+                    const userId = toRaw(this.user)?.id;
+                    if(!userId) return [];
+                    return api.get('/permissions/abilities/'+ userId);
                 },
                 async passwordReset(form) {
                   return api.post('/auth/password/reset', form);

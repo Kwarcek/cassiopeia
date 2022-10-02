@@ -63,7 +63,7 @@
 import RemixIcon from "@/components/RemixIcon.vue";
 import { useAuth } from "@/stores/auth.js";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import {useRouter} from "vue-router";
 
 export default {
     name: 'LoginView',
@@ -76,17 +76,20 @@ export default {
 
         let errors = ref([]);
 
+        const auth = useAuth();
+
         async function login() {
             try {
-                const response = await useAuth().login({
+                const response = await auth.login({
                     email: form.value.email,
                     password: form.value.password
                 });
-                useAuth().isAuth = true;
-                useAuth().token = response.data.access_token;
-                useAuth().tokenExpirationDate = response.data.token_expiration_date;
-                useAuth().user = response.data.user;
-                useAuth().abilities = []; // todo
+
+                auth.isAuth = true;
+                auth.token = response.data.access_token;
+                auth.tokenExpirationDate = response.data.token_expiration_date;
+                auth.user = response.data.user;
+                auth.abilities = await auth.fetchAbilities()
 
                 await useRouter().push({name: 'dashboard'})
 

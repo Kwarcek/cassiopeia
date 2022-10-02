@@ -9,7 +9,7 @@ class UserIndexResource extends Resource
     public function toArray($request): array
     {
         return [
-            'uuid' => $this->uuid,
+            'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
             'email_verified_at' => $this->email_verified_at,

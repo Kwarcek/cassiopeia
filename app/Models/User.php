@@ -21,7 +21,6 @@ class User extends Authenticatable implements AuthorityInterface, JWTSubject
     protected const ABILITY_CACHE_TTL = 600;
 
     public $incrementing = false;
-    public $primaryKey = 'uuid';
 
     protected $fillable = [
         'name',

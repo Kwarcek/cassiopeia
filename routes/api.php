@@ -38,4 +38,10 @@ Route::group([
         Route::get('/', [\App\Http\Api\Users\UserApiController::class, 'index']);
     });
 
+    Route::group([
+        'prefix' => 'permissions',
+    ], function () {
+        Route::get('abilities/{user}', [\App\Http\Api\Permissions\AbilityApiController::class, 'forUser']);
+    });
+
 });
