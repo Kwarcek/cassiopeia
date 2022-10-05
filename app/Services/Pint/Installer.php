@@ -34,15 +34,13 @@ class Installer
     {
         $gitHookPath = $this->getGitHookDirectoryPath().DIRECTORY_SEPARATOR;
 
-        copy(
+        return copy(
             $gitHookPath.'pre-commit',
             $gitHookPath.now()->toDateTimeString().'_pre-commit'
         );
-
-        return true;
     }
 
-    private function getCurrentPreCommitFilePath(): bool
+    private function getCurrentPreCommitFilePath(): string
     {
         return $this->getGitHookDirectoryPath().DIRECTORY_SEPARATOR.'pre-commit';
     }

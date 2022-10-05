@@ -7,6 +7,7 @@ use App\Services\Permissions\Containers\PermissionCallbacksContainer;
 use App\Services\Permissions\Interface\AuthorityInterface;
 use App\Services\Permissions\Interface\GateInterface;
 use Illuminate\Contracts\Auth\Access\Gate;
+use Illuminate\Validation\UnauthorizedException;
 
 class GateController implements GateInterface
 {
@@ -23,8 +24,7 @@ class GateController implements GateInterface
         AuthorityInterface $authority,
         string $ability,
         array $arguments = []
-    ): bool
-    {
+    ): bool {
         $abilities = $authority->getAbilitiesForAuthority();
 
         if ($this->isGod($abilities)) {
@@ -36,7 +36,7 @@ class GateController implements GateInterface
             $ability
         );
 
-        if(!$filteredAbilities) {
+        if (!$filteredAbilities) {
             return false;
         }
 
@@ -44,7 +44,8 @@ class GateController implements GateInterface
             return match ($filteredAbility['permission']) {
                 'deny' => false,
                 'allow' => true,
-                'callback' => $this->processCallback($filteredAbility, $authority, $ability, $arguments)
+                'callback' => $this->processCallback($filteredAbility, $authority, $ability, $arguments),
+                'default' => throw new UnauthorizedException(),
             };
         }
     }
@@ -54,11 +55,10 @@ class GateController implements GateInterface
         AuthorityInterface $authority,
         string $ability,
         array $arguments
-    ): bool
-    {
+    ): bool {
         $className = $this->permissionCallbacksContainer->fetch($filteredAbility['callback']);
 
-        if($className) {
+        if ($className) {
             return false;
         }
 
@@ -77,14 +77,14 @@ class GateController implements GateInterface
 
     protected function isGod(array $abilities): bool
     {
-        return collect($abilities)->filter(function(array $ability) {
-           return $ability['ability'] === 'godmode' &&  $ability['permission'] === 'allow';
+        return collect($abilities)->filter(function (array $ability) {
+            return $ability['ability'] === 'godmode' &&  $ability['permission'] === 'allow';
         })->isNotEmpty();
     }
 
     private function filterAbilities(array $abilities, string $ability): array
     {
-        return collect($abilities)->filter(function(array $loopAbility) use ($ability) {
+        return collect($abilities)->filter(function (array $loopAbility) use ($ability) {
             return $loopAbility['ability'] === $ability;
         })->toArray();
     }
