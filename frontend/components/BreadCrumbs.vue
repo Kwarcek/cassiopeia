@@ -12,7 +12,7 @@
                 class="inline-flex items-center"
             >
                 <span v-if="breadCrumb.icon">
-                    <i class="ri-remixicon-fill"></i>
+                    <RiRemixiconFill />
                 </span>
 
                 {{ breadCrumb.text }}
@@ -24,9 +24,11 @@
 <script>
 import {computed} from "vue";
 import { useRouter } from "vue-router";
+import { RiRemixiconFill } from 'vue-remix-icons';
 
 export default {
     name: 'BreadCrumbs',
+    components: { RiRemixiconFill},
     setup() {
         const router = useRouter();
         const routerMeta = router.currentRoute.value.meta;

@@ -2,7 +2,8 @@
 import {h} from 'vue';
 
 export default {
-    name: "RemixIcon",
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: "Icon",
     props: {
         icon: {
             type: String,

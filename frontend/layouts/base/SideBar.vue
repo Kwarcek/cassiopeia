@@ -1,9 +1,15 @@
 <template>
-    <aside class="w-72" aria-label="Sidebar">
+    <aside class="w-72 md:hidden sm:hidden">
         <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 h-screen">
             <p class="flex items-center pl-2.5 mb-7">
-                <img id="tailwind-logo" :src="tailwindLogo" class="mr-3 h-6 sm:h-7" alt="Laravel-Vue logo" />
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Laravel-Vue</span>
+                <img
+                    :src="tailwindLogo"
+                    class="mr-3 h-6 sm:h-7"
+                    alt="Laravel-Vue logo"
+                />
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+                    Laravel-Vue
+                </span>
             </p>
             <ul class="space-y-2">
                 <SideBarItem

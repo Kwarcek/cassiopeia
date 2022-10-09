@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import RemixIcon from "@/components/RemixIcon.vue";
+import RemixIcon from "@/components/forms/Icon.vue";
 import { useAuth } from "@/stores/auth.js";
 import { ref } from "vue";
 import {useRouter} from "vue-router";

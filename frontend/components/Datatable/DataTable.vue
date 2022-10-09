@@ -7,15 +7,17 @@
         >
             <div>
                 <slot name="header-left">
-                    <h3 class="text-xl font-semibold tracking-wider">{{title}}</h3>
+                    <h3 class="text-xl font-semibold tracking-wider">
+                        {{title}}
+                    </h3>
                 </slot>
             </div>
             <div class="flex items-center">
                 <div>
                     <input
-                        type="text"
                         v-if="showAction('search')"
                         v-model="filters.search"
+                        type="text"
                         :placeholder="'Search...'"
                         prefix-icon="el-icon-search"
                         class="search-input"
@@ -23,14 +25,27 @@
                         @change="refresh"
                     />
                 </div>
-                <div v-if="showAction('refresh')" class="ml-2">
-                    <BaseButton variant="white" size="sm" @click="refresh">
+                <div
+                    v-if="showAction('refresh')"
+                    class="ml-2"
+                >
+                    <BaseButton
+                        variant="white"
+                        size="sm"
+                        @click="refresh"
+                    >
                         <i class="ri-refresh-line w-5 h-5 text-blue-500"></i>
 <!--                        <RefreshCwIcon class="w-5 h-5 text-blue-500"/>-->
                     </BaseButton>
                 </div>
-                <div v-if="showAction('add')" class="ml-2">
-                    <BaseButton variant="primary" size="sm" @click="$emit('add', $event)">
+                <div
+                    v-if="showAction('add')"
+                    class="ml-2">
+                    <BaseButton
+                        variant="primary"
+                        size="sm"
+                        @click="$emit('add', $event)"
+                    >
                         <i class="ri-add-line w-5 h-5 text-white"></i>
 <!--                        <PlusIcon class="w-5 h-5 text-white"/>-->
                     </BaseButton>
@@ -50,34 +65,55 @@
                 v-bind="column"
             >
                 <template #default="{row}">
-                    <slot :name="column.prop" :row="row">
+                    <slot
+                        :name="column.prop"
+                        :row="row"
+                    >
                         <template v-if="column.component">
-                            <component :is="column.component" :column="column" :row="row"></component>
+                            <component
+                                :is="column.component"
+                                :column="column"
+                                :row="row"
+                            ></component>
                         </template>
-                        <div v-else class="truncate">{{get(row, column.prop) || '- -'}}</div>
+                        <div
+                            v-else
+                            class="truncate">
+                            {{get(row, column.prop) || '- -'}}
+                        </div>
                     </slot>
                 </template>
             </BaseTableColumn>
 
-            <BaseTableColumn v-if="actions" v-slot="{row, index}" align="right">
+            <BaseTableColumn
+                v-if="actions"
+                v-slot="{row, index}"
+                align="right"
+            >
                 <BaseButton
                     v-if="showAction('view')"
                     size="sm"
                     variant="gray-link"
                     @click="$emit('view', row, index)"
-                >View</BaseButton>
+                >
+                    View
+                </BaseButton>
                 <BaseButton
                     v-if="showAction('edit')"
                     variant="primary-link"
                     size="sm"
                     @click="$emit('edit', row, index)"
-                >Edit</BaseButton>
+                >
+                    Edit
+                </BaseButton>
                 <BaseButton
                     v-if="showAction('delete')"
                     variant="danger-link"
                     size="sm"
                     @click="onDelete(row, index)"
-                >Delete</BaseButton>
+                >
+                    Delete
+                </BaseButton>
                 <slot name="extra-actions"></slot>
             </BaseTableColumn>
         </BaseTable>

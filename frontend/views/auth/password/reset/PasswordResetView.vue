@@ -8,7 +8,7 @@
                 <div class="flex flex-col mb-5">
                     <div class="flex relative ">
                     <span class="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
-                        <RemixIcon icon="ri-mail-fill" />
+                        <RiMailFill />
                     </span>
                         <input
                             ref="EmailInputRef"
@@ -46,12 +46,11 @@
 <script>
 import { ref } from "vue";
 import api from "@/plugins/axios/api.js";
-import RemixIcon from "@/components/RemixIcon.vue";
-import { onMounted } from "vue";
+import { RiMailFill } from 'vue-remix-icons';
 
 export default {
     name: 'PasswordResetView',
-    components: {RemixIcon},
+    components: {RiMailFill},
     setup() {
         const email = ref(null);
         const EmailInputRef = ref(null);
@@ -65,10 +64,6 @@ export default {
                 console.log(exception)
             }
         }
-
-        onMounted(() => {
-            console.log(EmailInputRef);
-        })
 
         return {
             EmailInputRef,
