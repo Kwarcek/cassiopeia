@@ -16,7 +16,7 @@ export default defineConfig({
     plugins: [
         eslintPlugin(),
         laravel({
-            input: 'frontend/app.js',
+            input: 'frontend/app.ts',
             refresh: true,
         }),
         vue({

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useAuth } from "@/stores/auth.js";
-import { getBearerToken } from "@/helpers/auth.js";
+import { useAuth } from "@/stores/auth";
+import { getBearerToken } from "@/helpers/auth";
 
 const api = axios.create();
 

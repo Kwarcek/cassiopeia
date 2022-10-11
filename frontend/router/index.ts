@@ -1,11 +1,12 @@
 import {createRouter, createWebHistory } from "vue-router";
-import authRoutes from '@/router/auth/index.js'
-import userRoutes from '@/router/users/index.js'
-import { useAuth } from "@/stores/auth.js";
-import { usePermission } from "@/composables/permissions.js";
+import authRoutes from '@/router/auth'
+import userRoutes from '@/router/users'
+import { useAuth } from "@/stores/auth";
+import { usePermission } from "@/composables/permissions";
 
 const routes = [
     {
+        path: '/',
         component: () => import('@/layouts/base/BaseLayout.vue'),
         children: [
             {
@@ -59,12 +60,7 @@ router.beforeEach((to, from, next) => {
         ? usePermission().can(record.meta.permission)
         : true;
 
-    if (hasPermission === true) {
-        return next();
-    }
-
-    return next('/404');
-
+    return hasPermission ? next() : next('/404');
 });
 
 export default router;

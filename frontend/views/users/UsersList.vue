@@ -1,24 +1,17 @@
 <template>
     <div class="pt-6 px-4">
         <div class="mt-4 w-full">
-            <DataTable
-                :columns="columns"
-                actions="view,edit,delete,search,refresh"
-                title="Users list"
-                url="/users/paginate"
-                @edit="onRowEdit"
-                @view="onRowView"
-            />
+            <DataTable :columns="columns" actions="view,edit,delete,search,refresh" title="Users list" url="/users/paginate" @edit="onRowEdit" @view="onRowView" />
         </div>
     </div>
 </template>
 
 <script>
-import DataTable from "@/components/Datatable/DataTable.vue";
+import DataTable from "@/components/Datatable/DataTable.vue"
 
 export default {
-    name: 'UsersList',
-    components: {DataTable},
+    name: "UsersList",
+    components: { DataTable },
     setup() {
         const columns = [
             {
@@ -56,15 +49,11 @@ export default {
             //   minWidth: 150,
             //   maxWidth: 180,
             // },
-        ];
+        ]
 
-        function onRowEdit() {
+        function onRowEdit() {}
 
-        }
-
-        function onRowView() {
-
-        }
+        function onRowView() {}
 
         return {
             onRowEdit,

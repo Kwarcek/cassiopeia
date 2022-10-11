@@ -14,7 +14,7 @@ return [
         'default' => [
             'entrypoints' => [
                 'paths' => [
-                    'frontend/app.js',
+                    'frontend/app.ts',
                 ],
                 'ignore' => '/\\.(d\\.ts|json)$/',
             ],

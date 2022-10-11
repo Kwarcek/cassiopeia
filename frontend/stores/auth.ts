@@ -1,17 +1,19 @@
-import {defineStore} from 'pinia'
-import { useRouter } from 'vue-router';
-import api from "@/plugins/axios/api.js";
-import moment from 'moment';
-import {toRaw} from "vue";
+import { defineStore } from "pinia";
+import { useRouter } from "vue-router";
+import api from "@/plugins/axios/api";
+import moment from "moment";
+import { toRaw } from "vue";
 
 export const useAuth = defineStore({
-            id: 'Auth',
-            state: () => ({
+    id: "Auth",
+    state: () => ({
                 isAuth: false,
                 token: null,
                 tokenExpirationDate: null,
                 abilities: [],
-                user: {},
+                user: {
+                    id: null,
+                },
             }),
 
             actions: {
@@ -21,29 +23,30 @@ export const useAuth = defineStore({
                 loadAuthFromLocalStorage() {
                     const localStorageAuth = localStorage.getItem('auth');
                     if (localStorageAuth === null) return;
+                    const localStorageObject = JSON.parse(localStorageAuth);
 
-                    this.isAuth = localStorageAuth.isAuth;
-                    this.token = localStorageAuth.token;
-                    this.tokenExpirationDate = localStorageAuth.tokenExpirationDate;
-                    this.abilities = localStorageAuth.abilities;
-                    this.user = localStorageAuth.user;
+                    this.isAuth = localStorageObject.isAuth;
+                    this.token = localStorageObject.token;
+                    this.tokenExpirationDate = localStorageObject.tokenExpirationDate;
+                    this.abilities = localStorageObject.abilities;
+                    this.user = localStorageObject.user;
                 },
                 async login(loginForm) {
                     return api.post('/auth/login', loginForm);
                 },
                 async fetchAbilities() {
                     const userId = toRaw(this.user)?.id;
-                    if(!userId) return [];
-                    return api.get('/permissions/abilities/'+ userId);
+                    if (!userId) return [];
+                    return api.get('/permissions/abilities/' + userId);
                 },
                 async passwordReset(form) {
-                  return api.post('/auth/password/reset', form);
+                    return api.post('/auth/password/reset', form);
                 },
                 async logout() {
                     await api.post('/auth/logout');
                     await this.$reset();
                     await this.setAuthToLocalStorage();
-                    useRouter.push({ name: 'auth-login' });
+                    await useRouter().push({name: 'auth-login'});
                 },
             },
 

@@ -1,23 +1,23 @@
 <script>
-import { h } from 'vue';
+import { h } from "vue"
 
 export default {
-    name: 'BaseTableColumn',
-    inject: ['addColumn', 'removeColumn'],
+    name: "BaseTableColumn",
+    inject: ["addColumn", "removeColumn"],
     props: {
         sortable: Boolean,
         filterable: Boolean,
         label: {
             type: String,
-            default: '',
+            default: "",
         },
         align: {
             type: String,
-            default: '',
+            default: "",
         },
         prop: {
             type: String,
-            default: '',
+            default: "",
         },
         minWidth: {
             type: [String, Number],
@@ -30,32 +30,32 @@ export default {
     },
     data() {
         return {
-            sortDirection: '',
+            sortDirection: "",
         }
     },
     mounted() {
-        this.addColumn(this);
+        this.addColumn(this)
     },
     unmounted() {
         if (this.$el && this.$el.parentNode) {
-            this.$el.parentNode.removeChild(this.$el);
+            this.$el.parentNode.removeChild(this.$el)
         }
-        this.removeColumn(this);
+        this.removeColumn(this)
     },
     methods: {
         toggleSort() {
-            if (this.sortDirection === 'asc') {
-                this.sortDirection = 'desc'
-            } else if (this.sortDirection === 'desc') {
-                this.sortDirection = ''
+            if (this.sortDirection === "asc") {
+                this.sortDirection = "desc"
+            } else if (this.sortDirection === "desc") {
+                this.sortDirection = ""
             } else {
-                this.sortDirection = 'asc'
+                this.sortDirection = "asc"
             }
         },
         parseStyleProperty(property) {
-            let result = ''
+            let result = ""
 
-            if (typeof property === 'number') {
+            if (typeof property === "number") {
                 result = `${property}px`
             } else {
                 result = property
@@ -71,10 +71,10 @@ export default {
                 styles.maxWidth = this.parseStyleProperty(this.maxWidth)
             }
             return styles
-        }
+        },
     },
     render() {
         return h(null)
-    }
+    },
 }
 </script>

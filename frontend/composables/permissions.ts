@@ -1,4 +1,4 @@
-import { useAuth } from "@/stores/auth.js";
+import { useAuth } from "@/stores/auth";
 
 export function usePermission() {
     const auth = useAuth();

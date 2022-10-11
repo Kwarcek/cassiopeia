@@ -12,7 +12,7 @@
     @if(App::environment('production'))
         @vite
     @else
-        <script type="module" src="http://localhost:5173/frontend/app.js"></script>
+        <script type="module" src="http://localhost:5173/frontend/app.ts"></script>
     @endif
 </body>
 </html>

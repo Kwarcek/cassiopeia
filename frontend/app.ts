@@ -4,11 +4,11 @@ import 'remixicon/fonts/remixicon.css'
 import Echo from 'laravel-echo';
 import App from "./App.vue";
 import {createApp} from 'vue'
-import router from "./router/index.js";
-import pinia from "./stores/index.js";
+import router from "./router";
+import pinia from "./stores";
 import Pusher from 'pusher-js';
 import moment from 'moment';
-import { getBearerToken } from './helpers/auth.js'
+import { getBearerToken } from './helpers/auth'
 
 moment.locale=import.meta.env.APP_LOCALE;
 moment.defaultFormat='YYYY-MM-DD HH:mm:ss'

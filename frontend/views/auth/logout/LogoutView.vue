@@ -3,10 +3,10 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import { useAuth } from "@/stores/auth.js";
+import { onMounted } from "vue"
+import { useAuth } from "@/stores/auth"
 
 onMounted(async () => {
-    await useAuth().logout();
+    await useAuth().logout()
 })
 </script>
