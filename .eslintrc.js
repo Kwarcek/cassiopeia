@@ -13,10 +13,11 @@ module.exports = {
         "@vue/typescript/recommended",
         "prettier",
     ],
-    plugins: ["@typescript-eslint", "prettier"],
+    plugins: [
+        "@typescript-eslint",
+        "prettier"
+    ],
     rules: {
         "prettier/prettier": "error",
-        // not needed for vue 3
-        "vue/no-multiple-template-root": "off",
     },
 };

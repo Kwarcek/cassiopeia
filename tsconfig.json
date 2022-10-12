@@ -1,9 +1,10 @@
 {
     "compilerOptions": {
-        "target": "ESNext",
+        "baseUrl": ".",
+        "target": "esnext",
         "useDefineForClassFields": true,
-        "module": "ESNext",
-        "moduleResolution": "Node",
+        "module": "esnext",
+        "moduleResolution": "node",
         "strict": true,
         "jsx": "preserve",
         "sourceMap": true,
@@ -11,26 +12,32 @@
         "isolatedModules": true,
         "esModuleInterop": true,
         "lib": [
-            "ESNext",
-            "DOM"
+            "esnext",
+            "dom"
         ],
         "skipLibCheck": true,
-        "typeRoots": ["./node_modules/@types", "./frontend/types"],
+        "typeRoots": [
+            "./node_modules/@types",
+            "./frontend/types"
+        ],
+        "types": [
+            "node",
+            "vite/client"
+        ],
         "paths": {
             "@/*": [
-                "frontend/*"
-            ],
-        }
+                "./frontend/*"
+            ]
+        },
+        "plugins": [
+            {
+                "name": "@vuedx/typescript-plugin-vue"
+            }
+        ]
     },
     "include": [
         "frontend/**/*.ts",
         "frontend/**/*.d.ts",
-        "frontend/**/*.tsx",
         "frontend/**/*.vue"
-    ],
-    "references": [
-        {
-            "path": "./tsconfig.node.json"
-        }
     ]
 }

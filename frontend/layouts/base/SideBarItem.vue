@@ -13,7 +13,7 @@
     </li>
 </template>
 
-<script>
+<script lang="ts">
 import tailwindLogo from "@/assets/images/tailwind-logo.svg"
 
 export default {

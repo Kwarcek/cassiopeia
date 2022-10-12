@@ -33,23 +33,27 @@
                 class="inline-flex items-center text-xs font-thin text-center text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white cursor-pointer"
                 @click="$router.push({ name: 'auth-login' })"
             >
-                <span class="ml-2"> Przejdź do logowania </span>
+                <span class="ml-2">Przejdź do logowania</span>
             </a>
         </div>
     </div>
 </template>
 
-<script>
-import { ref } from "vue"
+<script lang="ts">
+import { ref, onMounted } from "vue"
 import api from "@/plugins/axios/api"
 
 export default {
     name: "PasswordResetView",
     setup() {
-        const email = ref(null)
-        const EmailInputRef = ref(null)
+        const email = ref<string>("")
+        const EmailInputRef = ref<object>({})
 
-        function resetPassword() {
+        onMounted(() => {
+            console.log(EmailInputRef)
+        })
+
+        function resetPassword(): void {
             try {
                 api.post("/auth/password/reset", {
                     email: email.value,

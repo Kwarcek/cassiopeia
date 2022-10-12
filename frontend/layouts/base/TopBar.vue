@@ -61,18 +61,18 @@
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
-import { useAuth } from "@/stores/auth";
+import { ref } from "vue"
+import { useAuth } from "@/stores/auth"
 
 export default {
     name: "TopBar",
     setup() {
-        const showUserDropdown = ref(false);
+        const showUserDropdown = ref<boolean>(false)
 
-        const auth = useAuth();
+        const auth = useAuth()
 
         function search() {
-            console.log("searching");
+            console.log("searching")
         }
 
         return {

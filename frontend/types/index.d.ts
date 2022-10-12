@@ -1,9 +1,16 @@
-import Pusher from 'pusher-js';
+import Pusher from "pusher-js"
+import Echo from "laravel-echo"
 
-export {};
+export {}
 
 declare global {
     interface Window {
-        Pusher: Pusher;
+        Pusher: Pusher
+        Echo: Echo
     }
+}
+
+export interface Ability {
+    ability: string,
+    permission: string,
 }

@@ -6,7 +6,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import DataTable from "@/components/Datatable/DataTable.vue"
 
 export default {
@@ -51,9 +51,13 @@ export default {
             // },
         ]
 
-        function onRowEdit() {}
+        function onRowEdit(): void {
+            console.log("onRowEdit")
+        }
 
-        function onRowView() {}
+        function onRowView(): void {
+            console.log("onRowView")
+        }
 
         return {
             onRowEdit,

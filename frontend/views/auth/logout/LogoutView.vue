@@ -2,7 +2,7 @@
     <div></div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { onMounted } from "vue"
 import { useAuth } from "@/stores/auth"
 
