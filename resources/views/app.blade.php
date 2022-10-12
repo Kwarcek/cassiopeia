@@ -8,11 +8,20 @@
 
 </head>
 <body class="antialiased">
-    <div id="app"></div>
-    @if(App::environment('production'))
-        @vite
-    @else
-        <script type="module" src="http://localhost:5173/frontend/app.ts"></script>
-    @endif
+<div id="app"></div>
+@production
+    @php
+        $manifest = json_decode(file_get_contents(public_path('dist/manifest.json')), true);
+    @endphp
+    <script type="module" src="/dist/{{ $manifest['resources/js/app.ts']['file'] }}"></script>
+    {{-- <link rel="stylesheet" href="/dist/{{ $manifest['resources/js/app.ts']['css'][0] }}"> --}}
+@endproduction
+@env(['local', 'development', 'staging'])
+    @php
+        $devUrl = \Illuminate\Support\Facades\Config::get('vite.configs.default.dev_server.url');
+    @endphp
+    <script type="module" src="{{ "{$devUrl}/@@vite/client" }}"></script>
+    <script type="module" src="{{ "{$devUrl}/frontend/app.ts" }}"></script>
+@endenv
 </body>
 </html>
