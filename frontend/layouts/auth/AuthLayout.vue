@@ -4,8 +4,7 @@
     </div>
 </template>
 
-<script setup></script>
-
+<script lang="ts"></script>
 <style>
 #app {
     background-color: #f8fafc;

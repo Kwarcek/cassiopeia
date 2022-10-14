@@ -12,7 +12,7 @@
     </nav>
 </template>
 
-<script>
+<script lang="ts">
 import { computed } from "vue"
 import { useRouter } from "vue-router"
 

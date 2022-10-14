@@ -13,7 +13,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import TopBar from "@/layouts/base/TopBar.vue"
 import SideBar from "@/layouts/base/SideBar.vue"
 import BreadCrumbs from "@/components/BreadCrumbs.vue"

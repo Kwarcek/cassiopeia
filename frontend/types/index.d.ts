@@ -9,8 +9,3 @@ declare global {
         Echo: Echo
     }
 }
-
-export interface Ability {
-    ability: string,
-    permission: string,
-}

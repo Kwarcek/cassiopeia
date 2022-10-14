@@ -1,7 +1,8 @@
-version: "3.8"
+version: "3.9"
 
 services:
     php:
+        container_name: php
         build:
             context: .
             dockerfile: docker/php/Dockerfile
@@ -15,9 +16,6 @@ services:
             - ${APP_PORT}:8092
             - ${DEV_SERVER_PORT}:5173
         restart: on-failure
-        links:
-            - redis
-            - mariadb
         depends_on:
             - redis
             - mariadb
@@ -25,6 +23,7 @@ services:
             - "host.docker.internal:host-gateway"
 
     mariadb:
+        container_name: mariadb
         image: mariadb:10.9.3
         volumes:
             - app-database-volume:/var/lib/mysql
@@ -49,14 +48,22 @@ services:
             retries: 10
 
     redis:
+        container_name: redis
         image: redis:7.0
         ports:
             - ${REDIS_PORT}:6379
         restart: always
+        volumes:
+            - 'app-redis-volume:/data'
         networks:
             - app-network
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            retries: 3
+            timeout: 5s
 
     node:
+        container_name: node
         image: node:18
         working_dir: /app
         volumes:
@@ -68,4 +75,6 @@ networks:
         driver: bridge
 volumes:
     app-database-volume:
+        driver: local
+    app-redis-volume:
         driver: local

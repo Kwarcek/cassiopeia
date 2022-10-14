@@ -53,7 +53,8 @@
         </button>
     </span>
 </template>
-<script>
+
+<script lang="ts">
 // import { LoaderIcon } from "vue-feather-icons";
 
 export default {

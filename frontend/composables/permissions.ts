@@ -1,4 +1,5 @@
 import { useAuth } from "@/stores/auth"
+import Ability from "@/interfaces/Ability.interface"
 
 export function usePermission() {
     const auth = useAuth()

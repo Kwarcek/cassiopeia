@@ -1,5 +1,5 @@
 <template>
-    <aside class="w-72 md:hidden sm:hidden">
+    <aside class="w-72">
         <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 h-screen">
             <p class="flex items-center pl-2.5 mb-7">
                 <img :src="tailwindLogo" class="mr-3 h-6 sm:h-7" alt="Laravel-Vue logo" />
@@ -19,26 +19,27 @@
 <script lang="ts">
 import tailwindLogo from "@/assets/images/tailwind-logo.svg"
 import SideBarItem from "@/layouts/base/SideBarItem.vue"
+import SidebarItemInterface from "@/interfaces/SidebarItem.interface"
 
 export default {
     name: "SideBar",
     components: { SideBarItem },
     setup() {
-        const sidebarItems = [
+        const sidebarItems: Array<SidebarItemInterface> = [
             {
                 text: "Dashboard",
                 icon: "ri-dashboard-fill",
-                target: "dashboard",
+                targetName: "dashboard",
             },
             {
                 text: "Users",
                 icon: "ri-user-line",
-                target: "users",
+                targetName: "users",
             },
             {
                 text: "Logout",
                 icon: "ri-logout-box-line",
-                target: "auth-logout",
+                targetName: "auth-logout",
             },
         ]
 

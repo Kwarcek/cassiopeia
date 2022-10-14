@@ -80,7 +80,8 @@
         </div>
     </div>
 </template>
-<script>
+
+<script lang="ts">
 import { cloneDeep, get, orderBy } from "lodash"
 import { h } from "vue"
 

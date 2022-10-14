@@ -1,4 +1,4 @@
-export function getBearerToken(): null|string {
+export function getBearerToken(): null | string {
     const auth = localStorage.getItem("auth")
     if (auth === null) return null
     const authObject = JSON.parse(auth)

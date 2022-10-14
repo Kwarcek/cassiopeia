@@ -3,14 +3,15 @@ import { useRouter } from "vue-router"
 import api from "@/plugins/axios/api"
 import moment from "moment"
 import { toRaw, PropType } from "vue"
-import { Ability } from "@/types";
+import Ability from "@/interfaces/Ability.interface"
+import LoginForm from "@/interfaces/LoginForm.interface"
 
 export const useAuth = defineStore({
     id: "Auth",
     state: () => ({
         isAuth: false as boolean,
-        token: null as string|null,
-        tokenExpirationDate: null as string|null,
+        token: null as string | null,
+        tokenExpirationDate: null as string | null,
         abilities: [] as PropType<Array<Ability>>,
         user: {
             id: null,
@@ -32,16 +33,18 @@ export const useAuth = defineStore({
             this.abilities = localStorageObject.abilities
             this.user = localStorageObject.user
         },
-        async login(loginForm: any) {
+        async login(loginForm: LoginForm) {
             return api.post("/auth/login", loginForm)
         },
         async fetchAbilities() {
             const userId = toRaw(this.user)?.id
             if (!userId) return []
-            return api.get("/permissions/abilities/" + userId)
+            return await api.get("/permissions/abilities/" + userId)
         },
-        async passwordReset(form: any) {
-            return api.post("/auth/password/reset", form)
+        async passwordReset(email: string) {
+            return api.post("/auth/password/reset", {
+                email: email,
+            })
         },
         async logout() {
             await api.post("/auth/logout")

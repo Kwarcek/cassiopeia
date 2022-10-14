@@ -78,7 +78,8 @@
         </div>
     </div>
 </template>
-<script>
+
+<script lang="ts">
 import { cloneDeep, get } from "lodash"
 import api from "@/plugins/axios/api"
 

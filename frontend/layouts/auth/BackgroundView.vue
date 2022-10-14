@@ -61,4 +61,4 @@
     </div>
 </template>
 
-<script setup></script>
+<script lang="ts"></script>
