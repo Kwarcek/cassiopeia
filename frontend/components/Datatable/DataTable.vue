@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <BaseTable :data="tableData" :local-sort="url === ''" :loading="loading" v-bind="$attrs" @sort="onSort">
+        <BaseTable :data="items" :local-sort="url === ''" :loading="loading" v-bind="$attrs" @sort="onSort">
             <BaseTableColumn v-for="(column, index) in columns" :key="column.prop || index" v-bind="column">
                 <template #default="{ row }">
                     <slot :name="column.prop" :row="row">
@@ -49,6 +49,61 @@
         </BaseTable>
 
         <div class="w-full flex justify-end mt-4 table-pagination">
+            <nav aria-label="Page navigation example">
+                <ul class="inline-flex -space-x-px">
+                    <li>
+                        <a
+                            href="#"
+                            class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            >Previous</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            >1</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            >2</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            aria-current="page"
+                            class="py-2 px-3 text-blue-600 bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                            >3</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            >4</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            >5</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            >Next</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+            <div :perPageOptions="perPageOptions" :perPageChange="perPageChange"></div>
             <!--            <ElPagination-->
             <!--                v-show="tableData.length > 0 && url"-->
             <!--                v-model:current-page="pagination.current_page"-->
@@ -85,14 +140,14 @@ import api from "@/plugins/axios/api"
 
 // import { RefreshCwIcon, PlusIcon } from "vue-feather-icons";
 // import { Select, Option, Pagination, Input } from "element-ui";
-
 // import PhoneLink from "./cells/PhoneLink";
 // import EmailLink from "./cells/EmailLink";
 // import Salary from "./cells/Salary";
 // import GenderBadge from "./cells/GenderBadge";
-import BaseButton from "./BaseButton.vue"
-import BaseTable from "./BaseTable.vue"
-import BaseTableColumn from "./BaseTableColumn.vue"
+import BaseButton from "@/components/Datatable/BaseButton.vue"
+import BaseTable from "@/components/Datatable/BaseTable.vue"
+import BaseTableColumn from "@/components/Datatable/BaseTableColumn.vue"
+import { computed, onBeforeMount, PropType, reactive, ref, toRaw, toRefs } from "vue"
 
 export default {
     name: "DataTable",
@@ -126,7 +181,7 @@ export default {
             default: "",
         },
         actions: {
-            type: String,
+            type: String as PropType<"view" | "edit" | "delete">,
             default: "",
         },
         url: {
@@ -139,89 +194,55 @@ export default {
         },
     },
     emits: ["add", "view", "delete", "edit"],
-    data() {
-        return {
-            tableData: cloneDeep(this.data),
-            loading: false,
-            perPageOptions: [5, 10, 15, 20, 25, 50],
-            pagination: {
-                current_page: 1,
-                per_page: 10,
-                total: 5,
-            },
-            filters: {
-                search: "",
-                sort: "",
-            },
-        }
-    },
-    computed: {
-        actionsArray() {
-            return this.actions.split(",").map((action) => action.trim().toLowerCase())
-        },
-        hasTitle() {
-            return this.$slots["header-left"] || this.title
-        },
-    },
-    created() {
-        this.refresh()
-    },
-    methods: {
-        get,
-        showAction(action) {
+    setup(props, { emit, slots }) {
+        const items = ref(cloneDeep(props.data))
+        const loading = ref(false)
+        const perPageOptions = [5, 10, 15, 20, 25, 50]
+        let pagination = reactive({
+            current_page: 1,
+            per_page: 10,
+            total: 5,
+        })
+
+        const filters = reactive({
+            search: "",
+            sort: "",
+        })
+
+        const actionsArray = computed(() => {
+            return props.actions.split(",").map((action) => action.trim().toLowerCase())
+        })
+
+        const hasTitle = computed(() => {
+            return slots["header-left"] || props.title
+        })
+
+        onBeforeMount(async () => {
+            await refresh()
+        })
+
+        function showAction(action: string) {
             if (!action) {
                 return false
             }
-            return this.actionsArray.includes(action)
-        },
-        perPageChange(value) {
-            this.pagination.per_page = value
-            this.refresh()
-        },
-        onSort({ prop, direction }) {
+            return actionsArray.value.includes(action)
+        }
+
+        async function perPageChange(value) {
+            pagination.per_page = value
+            await refresh()
+        }
+
+        async function onSort({ prop, direction }) {
             if (direction) {
-                this.filters.sort = `${prop}|${direction}`
+                filters.sort = `${prop}|${direction}`
             } else {
-                this.filters.sort = ""
+                filters.sort = ""
             }
-            this.refresh()
-        },
-        async refresh() {
-            if (!this.url) {
-                return
-            }
-            setTimeout(async () => {
-                try {
-                    this.loading = true
-                    // Change the params here based on your own api
-                    const params = {
-                        page: this.pagination.current_page,
-                        per_page: this.pagination.per_page,
-                    }
-                    if (this.filters.search) {
-                        params.filter = this.filters.search
-                    }
+            await refresh()
+        }
 
-                    if (this.filters.sort) {
-                        params.sort = this.filters.sort
-                    }
-
-                    const fullUrl = this.url + this.urlQuery
-                    const { data } = await api.get(fullUrl, { params })
-                    this.pagination = {
-                        per_page: data.per_page,
-                        total: data.total,
-                        current_page: data.current_page,
-                    }
-                    this.tableData = data.data
-                } catch (err) {
-                    console.log(err)
-                } finally {
-                    this.loading = false
-                }
-            }, 1500)
-        },
-        async onDelete(row, index) {
+        async function onDelete(row, index) {
             try {
                 const confirmed = await this.$deleteConfirm({
                     title: "Delete row",
@@ -232,14 +253,65 @@ export default {
                     return
                 }
 
-                this.$emit("delete", { row, index })
+                emit("delete", { row, index })
             } catch (err) {
                 console.log(err)
             }
-        },
+        }
+
+        async function refresh() {
+            if (!props.url) return
+
+            try {
+                loading.value = true
+                const params = {
+                    page: pagination.current_page,
+                    per_page: pagination.per_page,
+                    filter: null as string | null,
+                    sort: null as string | null,
+                }
+                if (filters.search) {
+                    params.filter = filters.search
+                }
+
+                if (filters.sort) {
+                    params.sort = filters.sort
+                }
+
+                const fullUrl = props.url + props.urlQuery
+                const { data } = await api.get(fullUrl, { params })
+                pagination = {
+                    per_page: data.per_page,
+                    total: data.total,
+                    current_page: data.current_page,
+                }
+                items.value = data.data
+            } catch (err) {
+                console.log(err)
+            } finally {
+                loading.value = false
+            }
+        }
+
+        toRefs(items.value)
+
+        return {
+            filters,
+            loading,
+            hasTitle,
+            items,
+            perPageOptions,
+            refresh,
+            onDelete,
+            onSort,
+            perPageChange,
+            showAction,
+            get,
+        }
     },
 }
 </script>
+
 <style scoped>
 .search-input {
     min-width: 250px;

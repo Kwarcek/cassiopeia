@@ -1,10 +1,6 @@
 <template>
-    <li>
-        <button
-            class="flex items-center p-2 text-sm font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-            @click="redirect"
-            :disabled="!targetName"
-        >
+    <li class="text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer" @click="redirect">
+        <button class="flex items-center p-2 text-sm font-normal" :disabled="!item.targetName">
             <slot name="prefix" class="flex-shrink-0 w-6 h-6 transition duration-75"></slot>
             <span class="flex-1 ml-3 whitespace-nowrap">
                 {{ item.text }}
@@ -28,10 +24,13 @@ export default {
             required: true,
         },
     },
-    setup(props: any) {
+    setup(props) {
+        const router = useRouter()
+
         const redirect = () => {
             if (!props.item.targetName) return
-            useRouter().push({ name: props.item.targetName })
+            console.log(props.item.targetName)
+            router.push({ name: props.item.targetName })
         }
 
         return {

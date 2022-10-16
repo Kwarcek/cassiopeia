@@ -1,8 +1,10 @@
 export default [
     {
         path: "/users",
-        name: "users",
-        component: () => import("@/views/users/UsersList.vue"),
-        meta: {},
+        name: "users-list",
+        component: () => import("@/views/user/UsersList.vue"),
+        meta: {
+            permission: "user.index",
+        },
     },
 ]

@@ -34,7 +34,7 @@ export default {
             {
                 text: "Users",
                 icon: "ri-user-line",
-                targetName: "users",
+                targetName: "users-list",
             },
             {
                 text: "Logout",

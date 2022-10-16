@@ -5,6 +5,7 @@
         <div class="w-full bg-gray-50 relative overflow-y-auto h-screen">
             <TopBar />
             <main>
+                <Notifications />
                 <BreadCrumbs />
                 <router-view></router-view>
             </main>
@@ -17,9 +18,10 @@
 import TopBar from "@/layouts/base/TopBar.vue"
 import SideBar from "@/layouts/base/SideBar.vue"
 import BreadCrumbs from "@/components/BreadCrumbs.vue"
+import Notifications from "@/layouts/base/Notifications.vue"
 
 export default {
     name: "BaseLayout",
-    components: { TopBar, SideBar, BreadCrumbs },
+    components: { TopBar, SideBar, BreadCrumbs, Notifications },
 }
 </script>

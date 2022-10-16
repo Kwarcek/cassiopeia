@@ -5,6 +5,7 @@ import moment from "moment"
 import { toRaw, PropType } from "vue"
 import Ability from "@/interfaces/Ability.interface"
 import LoginForm from "@/interfaces/LoginForm.interface"
+import NotificationItem from "@/interfaces/NotificationItem.interface"
 
 export const useAuth = defineStore({
     id: "Auth",
@@ -13,6 +14,7 @@ export const useAuth = defineStore({
         token: null as string | null,
         tokenExpirationDate: null as string | null,
         abilities: [] as PropType<Array<Ability>>,
+        notifications: [] as PropType<Array<NotificationItem>>,
         user: {
             id: null,
         },

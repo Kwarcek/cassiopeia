@@ -1,9 +1,8 @@
 <script lang="ts">
-import { h } from "vue"
+import { onMounted, onUnmounted, ref, inject, h, getCurrentInstance } from "vue"
 
 export default {
     name: "BaseTableColumn",
-    inject: ["addColumn", "removeColumn"],
     props: {
         sortable: Boolean,
         filterable: Boolean,
@@ -28,31 +27,40 @@ export default {
             default: null,
         },
     },
-    data() {
-        return {
-            sortDirection: "",
-        }
-    },
-    mounted() {
-        this.addColumn(this)
-    },
-    unmounted() {
-        if (this.$el && this.$el.parentNode) {
-            this.$el.parentNode.removeChild(this.$el)
-        }
-        this.removeColumn(this)
-    },
-    methods: {
-        toggleSort() {
-            if (this.sortDirection === "asc") {
-                this.sortDirection = "desc"
-            } else if (this.sortDirection === "desc") {
-                this.sortDirection = ""
-            } else {
-                this.sortDirection = "asc"
+    emit: ["addColumn", "removeColumn"],
+    setup(props, { emit }) {
+        const sortDirection = ref("")
+
+        const addColumn = inject("addColumn")
+        const removeColumn = inject("removeColumn")
+
+        onMounted(() => {
+            emit("addColumn", this)
+            addColumn(this)
+        })
+
+        onUnmounted(() => {
+            const instance = getCurrentInstance()
+            console.log(instance)
+
+            if (instance?.vnode && instance?.vnode?.el) {
+                instance.vnode.el.parentNode.removeChild(instance.vnode.el)
             }
-        },
-        parseStyleProperty(property) {
+            removeColumn(this)
+            emit("removeColumn", this)
+        })
+
+        function toggleSort() {
+            if (sortDirection.value === "asc") {
+                sortDirection.value = "desc"
+            } else if (sortDirection.value === "desc") {
+                sortDirection.value = ""
+            } else {
+                sortDirection.value = "asc"
+            }
+        }
+
+        function parseStyleProperty(property: number | string) {
             let result = ""
 
             if (typeof property === "number") {
@@ -61,17 +69,26 @@ export default {
                 result = property
             }
             return result
-        },
-        getStyles() {
-            const styles = {}
-            if (this.minWidth) {
-                styles.minWidth = this.parseStyleProperty(this.minWidth)
+        }
+
+        function getStyles() {
+            const styles = {
+                minWidth: 0 as string | number,
+                maxWidth: 0 as string | number,
             }
-            if (this.maxWidth) {
-                styles.maxWidth = this.parseStyleProperty(this.maxWidth)
+            if (props.minWidth) {
+                styles.minWidth = parseStyleProperty(props.minWidth)
+            }
+            if (props.maxWidth) {
+                styles.maxWidth = parseStyleProperty(props.maxWidth)
             }
             return styles
-        },
+        }
+
+        return {
+            getStyles,
+            toggleSort,
+        }
     },
     render() {
         return h(null)

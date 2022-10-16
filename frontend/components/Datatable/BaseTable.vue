@@ -48,7 +48,7 @@
                             }"
                             :style="column.getStyles()"
                         >
-                            <ColumnRenderer :row="row" :index="index" :column="column" />
+                            <ColumnRender :row="row" :index="index" :column="column" />
                         </td>
                     </tr>
                     <tr v-if="(data.length === 0 && !loading) || (data.length === 0 && loading)" key="empty">
@@ -82,47 +82,13 @@
 </template>
 
 <script lang="ts">
-import { cloneDeep, get, orderBy } from "lodash"
-import { h } from "vue"
-
-function getColumnData(row, prop) {
-    return get(row, `${prop}`, "")
-}
+import { cloneDeep, orderBy } from "lodash"
+import ColumnRender from "@/components/Datatable/ColumnRender.vue"
+import ColumnHeaderRenderer from "@/components/Datatable/ColumnHeaderRenderer.vue"
+import { watch, ref, provide, toRefs } from "vue"
 
 export default {
-    components: {
-        ColumnRenderer: {
-            props: ["row", "column", "index"],
-            render() {
-                if (this.column.$slots.default) {
-                    const renderedScopedSlot = this.column.$slots.default({
-                        row: this.row,
-                        index: this.index,
-                    })
-
-                    return h("div", { attrs: { class: "cell" } }, [renderedScopedSlot])
-                }
-                return h("span", [getColumnData(this.row, this.column.prop)])
-            },
-        },
-        ColumnHeaderRenderer: {
-            props: ["column"],
-            render() {
-                if (this.column.$slots.header) {
-                    return this.column.$slots.header({
-                        column: this.column,
-                    })
-                }
-                return h("span", [this.column.label])
-            },
-        },
-    },
-    provide() {
-        return {
-            addColumn: this.addColumn,
-            removeColumn: this.removeColumn,
-        }
-    },
+    components: { ColumnRender, ColumnHeaderRenderer },
     props: {
         data: {
             type: Array,
@@ -142,66 +108,75 @@ export default {
         },
     },
     emits: ["sort"],
-    data() {
-        return {
-            columns: [],
-            tableData: [],
+    setup(props, { emit }) {
+        const columns = ref([])
+        const tableData = ref([])
+
+        provide("addColumn", addColumn)
+        provide("removeColumn", removeColumn)
+
+        function addColumn(step) {
+            console.log(step)
+            columns.value.splice(columns.value.length, 0, step)
         }
-    },
-    watch: {
-        data: {
-            immediate: true,
-            handler(value) {
-                this.tableData = cloneDeep(value)
-            },
-        },
-    },
-    methods: {
-        addColumn(step) {
-            const index = this.columns.length
-            this.columns.splice(index, 0, step)
-        },
-        removeColumn(step) {
-            const columns = this.columns
-            const index = columns.indexOf(step)
+
+        function removeColumn(step) {
+            const index = columns.value.indexOf(step)
 
             if (index > -1) {
-                columns.splice(index, 1)
+                columns.value.splice(index, 1)
             }
-        },
-        resetOtherColumnsSort(exceptionColumn) {
-            this.columns.forEach((column) => {
+        }
+
+        function resetOtherColumnsSort(exceptionColumn) {
+            columns.value.forEach((column) => {
                 if (exceptionColumn.prop === column.prop) {
                     return
                 }
                 column.sortDirection = ""
             })
-        },
-        toggleSort(column) {
-            if (!this.localSort) {
-                this.resetOtherColumnsSort(column)
+        }
+
+        function toggleSort(column) {
+            if (!props.localSort) {
+                resetOtherColumnsSort(column)
             }
 
             column.toggleSort()
-            this.$emit("sort", {
+            emit("sort", {
                 prop: column.prop,
                 direction: column.sortDirection,
             })
 
-            if (!this.localSort) {
+            if (!props.localSort) {
                 return
             }
 
-            const columnsToSort = this.columns.filter((c) => c.sortDirection !== "")
+            const columnsToSort = columns.value.filter((c) => c.sortDirection !== "")
             const columnProps = columnsToSort.map((c) => c.prop)
             const columnSortOrders = columnsToSort.map((c) => c.sortDirection)
 
             if (columnProps.length === 0) {
-                this.tableData = cloneDeep(this.data)
+                tableData.value = cloneDeep(props.data)
             } else {
-                this.tableData = orderBy(this.tableData, columnProps, columnSortOrders)
+                tableData.value = orderBy(tableData, columnProps, columnSortOrders)
             }
-        },
+        }
+
+        watch(
+            () => props.data,
+            (value) => {
+                tableData.value = cloneDeep(value)
+            }
+        )
+
+        return {
+            columns,
+            tableData,
+            toggleSort,
+            addColumn,
+            removeColumn,
+        }
     },
 }
 </script>
