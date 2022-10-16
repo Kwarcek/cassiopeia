@@ -18,4 +18,14 @@ trait HasPermission
     {
         return $this->morphToMany(Role::class, 'roleable', 'permissions_role_morph');
     }
+
+    public function getAbilitiesCacheKey(): string
+    {
+        return $this->getAbilityCacheTag() . '-' . $this->getTable() . '-' . $this->getKey();
+    }
+
+    public function getAbilityCacheTag(): string
+    {
+        return 'abilities';
+    }
 }
