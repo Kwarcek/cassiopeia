@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthApiController extends ApiController
 {
@@ -57,7 +58,9 @@ class AuthApiController extends ApiController
     {
         $this->middleware('auth:api');
 
-        auth('api')->logout();
+        try {
+            auth('api')->logout();
+        } catch(JWTException $exception) {}
 
         return response()->json([
             'message' => 'Successfully logged out'
