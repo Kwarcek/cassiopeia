@@ -1,6 +1,11 @@
 <script lang="ts">
 import { onMounted, onUnmounted, ref, inject, h, getCurrentInstance } from "vue"
 
+interface Style {
+    minWidth: string | number
+    maxWidth: string | number
+}
+
 export default {
     name: "BaseTableColumn",
     props: {
@@ -43,14 +48,14 @@ export default {
             const instance = getCurrentInstance()
             console.log(instance)
 
-            if (instance?.vnode && instance?.vnode?.el) {
+            if (instance?.vnode && instance?.vnode?.el) { // todo
                 instance.vnode.el.parentNode.removeChild(instance.vnode.el)
             }
             removeColumn(this)
             emit("removeColumn", this)
         })
 
-        function toggleSort() {
+        function toggleSort(): void {
             if (sortDirection.value === "asc") {
                 sortDirection.value = "desc"
             } else if (sortDirection.value === "desc") {
@@ -60,7 +65,7 @@ export default {
             }
         }
 
-        function parseStyleProperty(property: number | string) {
+        function parseStyleProperty(property: number | string): string {
             let result = ""
 
             if (typeof property === "number") {
@@ -71,7 +76,7 @@ export default {
             return result
         }
 
-        function getStyles() {
+        function getStyles(): Style {
             const styles = {
                 minWidth: 0 as string | number,
                 maxWidth: 0 as string | number,

@@ -2,14 +2,16 @@
     <div class="flex overflow-hidden bg-white">
         <SideBar />
         <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10"></div>
-        <div class="w-full bg-gray-50 relative overflow-y-auto h-screen">
+        <div class="dark:bg-gray-800 w-full bg-gray-50 relative overflow-y-auto h-screen">
             <TopBar />
             <main>
                 <Notifications />
                 <BreadCrumbs />
                 <router-view></router-view>
             </main>
-            <p class="text-center text-sm text-gray-500 my-10">&copy; 2022 <a href="#" class="hover:underline" target="_blank">Flowbite</a>. All rights reserved.</p>
+            <p class="text-center text-sm text-gray-500 my-10 dark:text-white">
+                &copy; 2022 <a href="https://github.com/Kwarcek/laravel-vue" class="hover:underline" target="_blank">Laravel-Vue</a>. All rights reserved.
+            </p>
         </div>
     </div>
 </template>

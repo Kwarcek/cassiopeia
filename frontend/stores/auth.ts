@@ -6,6 +6,7 @@ import { toRaw, PropType } from "vue"
 import Ability from "@/interfaces/Ability.interface"
 import LoginForm from "@/interfaces/LoginForm.interface"
 import NotificationItem from "@/interfaces/NotificationItem.interface"
+import { clone } from "lodash"
 
 export const useAuth = defineStore({
     id: "Auth",
@@ -13,6 +14,7 @@ export const useAuth = defineStore({
         isAuth: false as boolean,
         token: null as string | null,
         tokenExpirationDate: null as string | null,
+        darkMode: false as boolean,
         abilities: [] as PropType<Array<Ability>>,
         notifications: [] as PropType<Array<NotificationItem>>,
         user: {
@@ -49,10 +51,13 @@ export const useAuth = defineStore({
             })
         },
         async logout() {
+            const router = useRouter()
             await api.post("/auth/logout")
+            const darkMode = clone(this.darkMode)
             await this.$reset()
+            this.darkMode = darkMode
             await this.setAuthToLocalStorage()
-            await useRouter().push({ name: "auth-login" })
+            await router.push({ name: "auth-login" })
         },
     },
 

@@ -1,12 +1,12 @@
-import {defineConfig, ConfigEnv} from 'vite';
-import laravel from 'laravel-vite-plugin';
-import vue from '@vitejs/plugin-vue';
-import eslintPlugin from 'vite-plugin-eslint';
-import path from 'path';
+import { defineConfig, ConfigEnv } from "vite"
+import laravel from "laravel-vite-plugin"
+import vue from "@vitejs/plugin-vue"
+import eslintPlugin from "vite-plugin-eslint"
+import path from "path"
 
-export default defineConfig(({command}: ConfigEnv) => {
+export default defineConfig(({ command }: ConfigEnv) => {
     return {
-        base: command === 'build' ? '/dist/' : '',
+        base: command === "build" ? "/dist/" : "",
         publicDir: false,
         build: {
             manifest: true,
@@ -18,17 +18,17 @@ export default defineConfig(({command}: ConfigEnv) => {
             },
         },
         server: {
-            host: '0.0.0.0',
+            host: "0.0.0.0",
             strictPort: true,
             hmr: {
-                host: 'localhost',
+                host: "localhost",
                 overlay: false,
             },
         },
         plugins: [
             eslintPlugin(),
             laravel({
-                input: 'frontend/app.ts',
+                input: "frontend/app.ts",
                 refresh: true,
             }),
             vue({
@@ -42,8 +42,8 @@ export default defineConfig(({command}: ConfigEnv) => {
         ],
         resolve: {
             alias: {
-                '@': path.resolve(__dirname, './frontend'),
+                "@": path.resolve(__dirname, "./frontend"),
             },
-        }
+        },
     }
 })

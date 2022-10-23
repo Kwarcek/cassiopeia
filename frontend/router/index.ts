@@ -55,9 +55,15 @@ router.beforeEach((to, from, next) => {
 
     const record = to.matched[to.matched.length - 1]
 
-    const hasPermission = record?.meta?.permission ? usePermission().can(record.meta.permission) : true
+    // const hasPermission = record?.meta?.permission ? usePermission().can(record.meta.permission) : true
 
-    return hasPermission ? next() : next("/404")
+    const hasPermission = true
+
+    if (hasPermission) {
+        return next()
+    }
+
+    return next("/404")
 })
 
 export default router

@@ -149,6 +149,16 @@ import BaseTable from "@/components/Datatable/BaseTable.vue"
 import BaseTableColumn from "@/components/Datatable/BaseTableColumn.vue"
 import { computed, onBeforeMount, PropType, reactive, ref, toRaw, toRefs } from "vue"
 
+interface Column {
+    label?: string
+    prop?: string
+    filterable?: boolean
+    component?: null
+    minWidth?: number
+    maxWidth?: number
+    sortable?: boolean
+}
+
 export default {
     name: "DataTable",
     components: {
@@ -173,7 +183,7 @@ export default {
             default: () => [],
         },
         columns: {
-            type: Array,
+            type: Array as PropType<Array<Column>>,
             default: () => [],
         },
         title: {
