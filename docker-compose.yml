@@ -62,6 +62,16 @@ services:
             retries: 3
             timeout: 5s
 
+    mailhog:
+        container_name: mailhog
+        image: mailhog/mailhog:v1.0.1
+        ports:
+            - ${MAIL_PORT}:1025
+            - 8026:8025
+        restart: always
+        networks:
+            - app-network
+
     node:
         container_name: node
         image: node:18
