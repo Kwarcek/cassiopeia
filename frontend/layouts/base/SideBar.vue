@@ -19,13 +19,18 @@
 <script lang="ts">
 import tailwindLogo from "@/assets/images/tailwind-logo.svg"
 import SideBarItem from "@/layouts/base/SideBarItem.vue"
-import SidebarItemInterface from "@/interfaces/SidebarItem.interface"
+
+interface SidebarItem {
+    text: string
+    icon?: string
+    targetName?: string | null
+}
 
 export default {
     name: "SideBar",
     components: { SideBarItem },
     setup() {
-        const sidebarItems: Array<SidebarItemInterface> = [
+        const sidebarItems: SidebarItem[] = [
             {
                 text: "Dashboard",
                 icon: "ri-dashboard-fill",

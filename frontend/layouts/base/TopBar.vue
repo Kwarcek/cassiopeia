@@ -24,7 +24,7 @@
                     </form>
                 </div>
                 <div class="flex items-center">
-                    <div class="pr-5">
+                    <div class="pr-5 flex justify-center items-center">
                         <div class="sun sun-logo" ref="SunIcon">
                             <i class="text-xl cursor-pointer ri-sun-line" @click="changeDarkMode" />
                         </div>

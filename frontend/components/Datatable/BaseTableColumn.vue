@@ -48,7 +48,8 @@ export default {
             const instance = getCurrentInstance()
             console.log(instance)
 
-            if (instance?.vnode && instance?.vnode?.el) { // todo
+            if (instance?.vnode?.el) {
+                // todo
                 instance.vnode.el.parentNode.removeChild(instance.vnode.el)
             }
             removeColumn(this)

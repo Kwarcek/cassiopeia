@@ -3,10 +3,22 @@ import { useRouter } from "vue-router"
 import api from "@/plugins/axios/api"
 import moment from "moment"
 import { toRaw, PropType } from "vue"
-import Ability from "@/interfaces/Ability.interface"
-import LoginForm from "@/interfaces/LoginForm.interface"
-import NotificationItem from "@/interfaces/NotificationItem.interface"
 import { clone } from "lodash"
+
+interface NotificationItem {
+    type: string
+    message: string
+}
+
+interface LoginForm {
+    email: string
+    password: string
+}
+
+interface Ability {
+    ability: string
+    permission: string
+}
 
 export const useAuth = defineStore({
     id: "Auth",
@@ -15,18 +27,18 @@ export const useAuth = defineStore({
         token: null as string | null,
         tokenExpirationDate: null as string | null,
         darkMode: false as boolean,
-        abilities: [] as PropType<Array<Ability>>,
-        notifications: [] as PropType<Array<NotificationItem>>,
+        abilities: [] as PropType<Ability[]>,
+        notifications: [] as PropType<NotificationItem[]>,
         user: {
             id: null,
         },
     }),
 
     actions: {
-        setAuthToLocalStorage() {
+        setAuthToLocalStorage(): void {
             localStorage.setItem("auth", JSON.stringify(this.$state))
         },
-        loadAuthFromLocalStorage() {
+        loadAuthFromLocalStorage(): void {
             const localStorageAuth = localStorage.getItem("auth")
             if (localStorageAuth === null) return
             const localStorageObject = JSON.parse(localStorageAuth)

@@ -11,6 +11,7 @@ export default defineConfig(({ command }: ConfigEnv) => {
         build: {
             manifest: true,
             outDir: "public/dist",
+            reportCompressedSize: true,
             rollupOptions: {
                 input: {
                     app: "frontend/app.ts",

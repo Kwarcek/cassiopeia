@@ -48,112 +48,52 @@
             </BaseTableColumn>
         </BaseTable>
 
-        <div class="w-full flex justify-end mt-4 table-pagination">
-            <nav aria-label="Page navigation example">
-                <ul class="inline-flex -space-x-px">
-                    <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >Previous</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >1</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >2</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            aria-current="page"
-                            class="py-2 px-3 text-blue-600 bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                            >3</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >4</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >5</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >Next</a
-                        >
-                    </li>
-                </ul>
-            </nav>
-            <div :perPageOptions="perPageOptions" :perPageChange="perPageChange"></div>
-            <!--            <ElPagination-->
-            <!--                v-show="tableData.length > 0 && url"-->
-            <!--                v-model:current-page="pagination.current_page"-->
-            <!--                :page-sizes="perPageOptions"-->
-            <!--                :page-size="pagination.per_page"-->
-            <!--                :pager-count="5"-->
-            <!--                layout="total, slot, prev, pager, next, jumper"-->
-            <!--                :total="pagination.total"-->
-            <!--                @size-change="perPageChange"-->
-            <!--                @current-change="refresh"-->
-            <!--            >-->
-            <!--                <ElSelect-->
-            <!--                    v-model="pagination.per_page"-->
-            <!--                    class="select-default"-->
-            <!--                    size="mini"-->
-            <!--                    @change="refresh"-->
-            <!--                >-->
-            <!--                    <ElOption-->
-            <!--                        v-for="value in perPageOptions"-->
-            <!--                        :key="value"-->
-            <!--                        class="select-default"-->
-            <!--                        :label="value"-->
-            <!--                        :value="value"-->
-            <!--                    ></ElOption>-->
-            <!--                </ElSelect>-->
-            <!--            </ElPagination>-->
-        </div>
+        <Pagination />
+        <!--            <div :perPageOptions="perPageOptions" :perPageChange="perPageChange"></div>-->
+        <!--            <ElPagination-->
+        <!--                v-show="tableData.length > 0 && url"-->
+        <!--                v-model:current-page="pagination.current_page"-->
+        <!--                :page-sizes="perPageOptions"-->
+        <!--                :page-size="pagination.per_page"-->
+        <!--                :pager-count="5"-->
+        <!--                layout="total, slot, prev, pager, next, jumper"-->
+        <!--                :total="pagination.total"-->
+        <!--                @size-change="perPageChange"-->
+        <!--                @current-change="refresh"-->
+        <!--            >-->
+        <!--                <ElSelect-->
+        <!--                    v-model="pagination.per_page"-->
+        <!--                    class="select-default"-->
+        <!--                    size="mini"-->
+        <!--                    @change="refresh"-->
+        <!--                >-->
+        <!--                    <ElOption-->
+        <!--                        v-for="value in perPageOptions"-->
+        <!--                        :key="value"-->
+        <!--                        class="select-default"-->
+        <!--                        :label="value"-->
+        <!--                        :value="value"-->
+        <!--                    ></ElOption>-->
+        <!--                </ElSelect>-->
+        <!--            </ElPagination>-->
+        <!--        </div>-->
     </div>
 </template>
 
 <script lang="ts">
 import { cloneDeep, get } from "lodash"
 import api from "@/plugins/axios/api"
-
-// import { RefreshCwIcon, PlusIcon } from "vue-feather-icons";
-// import { Select, Option, Pagination, Input } from "element-ui";
-// import PhoneLink from "./cells/PhoneLink";
-// import EmailLink from "./cells/EmailLink";
-// import Salary from "./cells/Salary";
-// import GenderBadge from "./cells/GenderBadge";
 import BaseButton from "@/components/Datatable/BaseButton.vue"
 import BaseTable from "@/components/Datatable/BaseTable.vue"
 import BaseTableColumn from "@/components/Datatable/BaseTableColumn.vue"
-import { computed, onBeforeMount, PropType, reactive, ref, toRaw, toRefs } from "vue"
+import { computed, onBeforeMount, PropType, reactive, ref, toRefs, Component } from "vue"
+import Pagination from "@/components/Pagination.vue"
 
 interface Column {
     label?: string
     prop?: string
     filterable?: boolean
-    component?: null
+    component?: Component | null
     minWidth?: number
     maxWidth?: number
     sortable?: boolean
@@ -162,19 +102,10 @@ interface Column {
 export default {
     name: "DataTable",
     components: {
-        // PhoneLink,
-        // EmailLink,
-        // Salary,
-        // GenderBadge,
-        // PlusIcon,
-        // RefreshCwIcon,
+        Pagination,
         BaseButton,
         BaseTable,
         BaseTableColumn,
-        // [Input.name]: Input,
-        // [Select.name]: Select,
-        // [Option.name]: Option,
-        // [Pagination.name]: Pagination
     },
     inheritAttrs: false,
     props: {
@@ -183,7 +114,7 @@ export default {
             default: () => [],
         },
         columns: {
-            type: Array as PropType<Array<Column>>,
+            type: Array as PropType<Column[]>,
             default: () => [],
         },
         title: {
@@ -209,9 +140,9 @@ export default {
         const loading = ref(false)
         const perPageOptions = [5, 10, 15, 20, 25, 50]
         let pagination = reactive({
-            current_page: 1,
-            per_page: 10,
-            total: 5,
+            current_page: 1 as number,
+            per_page: 10 as number,
+            total: 5 as number,
         })
 
         const filters = reactive({
@@ -220,7 +151,7 @@ export default {
         })
 
         const actionsArray = computed(() => {
-            return props.actions.split(",").map((action) => action.trim().toLowerCase())
+            return props.actions.split(",").map((action: string) => action.trim().toLowerCase())
         })
 
         const hasTitle = computed(() => {
@@ -238,7 +169,7 @@ export default {
             return actionsArray.value.includes(action)
         }
 
-        async function perPageChange(value) {
+        async function perPageChange(value: number) {
             pagination.per_page = value
             await refresh()
         }

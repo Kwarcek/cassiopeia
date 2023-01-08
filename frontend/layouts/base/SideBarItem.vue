@@ -13,18 +13,23 @@
 <script lang="ts">
 import tailwindLogo from "@/assets/images/tailwind-logo.svg"
 import { PropType } from "vue"
-import SidebarItemInterface from "@/interfaces/SidebarItem.interface"
 import { useRouter } from "vue-router"
+
+interface SidebarItem {
+    text: string
+    icon?: string
+    targetName?: string | null
+}
 
 export default {
     name: "SideBarItem",
     props: {
         item: {
-            type: Object as PropType<SidebarItemInterface>,
+            type: Object as PropType<SidebarItem>,
             required: true,
         },
     },
-    setup(props) {
+    setup(props: { item: SidebarItem }) {
         const router = useRouter()
 
         const redirect = () => {
