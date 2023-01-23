@@ -2,8 +2,8 @@
     <aside class="w-72">
         <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 h-screen">
             <p class="flex items-center pl-2.5 mb-7">
-                <img :src="tailwindLogo" class="mr-3 h-6 sm:h-7" alt="Laravel-Vue logo" />
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"> Laravel-Vue </span>
+                <img :src="projectLogo" class="mr-3 h-6 sm:h-7" alt="Cassiopeia logo" />
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"> Cassiopeia </span>
             </p>
             <ul class="space-y-2">
                 <SideBarItem v-for="(item, index) in sidebarItems" :key="index" :item="item">
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import tailwindLogo from "@/assets/images/tailwind-logo.svg"
+import projectLogo from "@/assets/images/cassiopeia-logo.svg"
 import SideBarItem from "@/layouts/base/SideBarItem.vue"
 
 interface SidebarItem {
@@ -49,7 +49,7 @@ export default {
         ]
 
         return {
-            tailwindLogo,
+            projectLogo,
             sidebarItems,
         }
     },

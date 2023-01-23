@@ -10,7 +10,7 @@
                 <router-view></router-view>
             </main>
             <p class="text-center text-sm text-gray-500 my-10 dark:text-white">
-                &copy; 2022 <a href="https://github.com/Kwarcek/laravel-vue" class="hover:underline" target="_blank">Laravel-Vue</a>. All rights reserved.
+                &copy; 2022 <a href="https://github.com/Kwarcek/cassiopeia" class="hover:underline" target="_blank">Cassiopeia</a>. All rights reserved.
             </p>
         </div>
     </div>

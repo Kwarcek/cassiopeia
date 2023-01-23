@@ -1,4 +1,5 @@
-<h1>Laravel-Vue</h1>
+<img src="https://raw.githubusercontent.com/Kwarcek/cassiopeia/master/public/cassiopeia-logo.svg" style="width: 3rem; height: 3rem; vertical-align: bottom;" />
+<h1 style="display:inline">Cassiopeia</h1>
 
 🚧 Project is still "under construction" for development only 🚧
 
@@ -13,7 +14,7 @@
 - [Pinia - Store Managment](https://pinia.vuejs.org/)
 
 ## Installation
-1. Clone repository (`git clone https://github.com/Kwarcek/laravel-vue`)
-2. Go to project directory (`cd laravel-vue`)
+1. Clone repository (`git clone https://github.com/Kwarcek/cassiopeia`)
+2. Go to project directory (`cd cassiopeia`)
 3. Build docker (`docker compose up -d`)
 4. Open container with bash (`docker exec <container name> bash`)
