@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/Kwarcek/cassiopeia/master/public/cassiopeia-logo.svg" style="width: 3rem; height: 3rem; vertical-align: bottom;" />
+<img src="https://raw.githubusercontent.com/Kwarcek/cassiopeia/master/frontend/assets/images/cassiopeia-logo.svg" style="margin-right: 0.5rem; width: 3rem; height: 3rem; vertical-align: bottom;" />
 <h1 style="display:inline">Cassiopeia</h1>
 
 🚧 Project is still "under construction" for development only 🚧
