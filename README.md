@@ -19,3 +19,10 @@
 3. Copy `.env.example` file to `.env`
 4. Build docker (`docker compose up -d`)
 5. Open container with bash (`docker exec <container name> bash`)
+6. Install node package manager (`npm install`)
+7. Install composer (`composer install`)
+8. Restart services (`supervisorctl restart all`)
+9. Generate Laravel app key (`php artisan key:generate`)
+10.
+a) run frontend server on development - `npm run dev`
+b) run frontend server for production - `npm run build`
