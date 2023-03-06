@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Model::preventLazyLoading(! app()->isProduction());
     }
 
     private function registerNonProductionProviders(): void
