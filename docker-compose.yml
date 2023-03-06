@@ -21,7 +21,7 @@ services:
 
     mariadb:
         container_name: mariadb
-        image: mariadb:10.9.3
+        image: mariadb:10.11.2
         volumes:
             - app-database-volume:/var/lib/mysql
             - ./docker/database:/docker-entrypoint-initdb.d:ro
@@ -44,7 +44,7 @@ services:
 
     redis:
         container_name: redis
-        image: redis:7.0
+        image: redis:7.0.9
         ports:
             - ${REDIS_PORT}:6379
         restart: always
