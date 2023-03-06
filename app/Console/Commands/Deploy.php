@@ -2,8 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Support\Facades\App;
-
 class Deploy extends Command
 {
     protected $signature = 'app:deploy';
@@ -21,16 +19,17 @@ class Deploy extends Command
         $this->info('Generating JWT Secret');
         $this->call('jwt:secret', ['--always-no' => true]);
 
-        if(!App::environment('production')) {
+        if(!$this->laravel->environment('production')) {
             $this->onlyForDevelopment();
         }
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     private function onlyForDevelopment(): int
     {
         $this->call('pint:init');
+
         return 0;
     }
 }
