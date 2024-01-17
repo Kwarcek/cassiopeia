@@ -1,7 +1,7 @@
-FROM php:8.2.3-cli
+FROM php:8.3.1-cli
 WORKDIR "/app"
 
-RUN curl -sL https://raw.githubusercontent.com/nodesource/distributions/master/deb/setup_18.x | bash
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash
 
 RUN apt-get update && apt-get install vim -y && \
     apt-get install openssl -y && \
