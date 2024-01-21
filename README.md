@@ -23,7 +23,7 @@
 7. Install composer (`composer install`)
 8. Restart services (`supervisorctl restart all`)
 9. Generate Laravel app key (`php artisan key:generate`)
-10. Deploy application (`php artisan app:deploy`)
+10. Init backend application (`php artisan app:init`)
 11.
 a) run frontend server on development - `npm run dev`    
 b) run frontend server for production - `npm run build`

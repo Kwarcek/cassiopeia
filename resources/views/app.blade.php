@@ -13,15 +13,15 @@
     @php
         $manifest = json_decode(file_get_contents(public_path('dist/manifest.json')), true);
     @endphp
-    <script type="module" src="/dist/{{ $manifest['resources/js/app.ts']['file'] }}"></script>
-    {{-- <link rel="stylesheet" href="/dist/{{ $manifest['resources/js/app.ts']['css'][0] }}"> --}}
+    <script type="module" src="/dist/{{ $manifest['resources/js/main.js']['file'] }}"></script>
+    {{-- <link rel="stylesheet" href="/dist/{{ $manifest['resources/js/main.js']['css'][0] }}"> --}}
 @endproduction
 @env(['local', 'development', 'staging'])
     @php
         $devUrl = \Illuminate\Support\Facades\Config::get('vite.configs.default.dev_server.url');
     @endphp
     <script type="module" src="{{ "{$devUrl}/@@vite/client" }}"></script>
-    <script type="module" src="{{ "{$devUrl}/frontend/app.ts" }}"></script>
+    <script type="module" src="{{ "{$devUrl}/frontend/main.js" }}"></script>
 @endenv
 </body>
 </html>
