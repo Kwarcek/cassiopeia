@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\Console\Commands\Deploy;
+use App\Console\Commands\AppInit;
 use App\Console\Commands\Pint;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
     /** @var string[] */
     protected $commands = [
         Pint::class,
-        Deploy::class
+        AppInit::class
     ];
 
     /**

@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-class Deploy extends Command
+class AppInit extends Command
 {
-    protected $signature = 'app:deploy';
+    protected $signature = 'app:init';
 
-    protected $description = 'Deploy application';
+    protected $description = 'Initialization of Laravel App';
 
     public function handle(): int
     {
@@ -20,13 +20,13 @@ class Deploy extends Command
         $this->call('jwt:secret', ['--always-no' => true]);
 
         if(!$this->laravel->environment('production')) {
-            $this->onlyForDevelopment();
+            $this->nonProductionInit();
         }
 
         return Command::SUCCESS;
     }
 
-    private function onlyForDevelopment(): int
+    private function nonProductionInit(): int
     {
         $this->call('pint:init');
 
