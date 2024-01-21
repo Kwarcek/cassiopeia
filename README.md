@@ -9,7 +9,7 @@
 - [Docker - containerization](https://www.docker.com/).
 - [Vue.JS - Javascript Framework](https://vuejs.org/).
 - [TailwindCSS - CSS Framework](https://tailwindcss.com/).
-- [Flowbite - TailwindCSS Components](https://flowbite.com/).
+- [PrimeVue - Components Library](https://primevue.org/).
 - [Vite - Frontend Server](https://vitejs.dev/)
 - [Pinia - Store Managment](https://pinia.vuejs.org/)
 
